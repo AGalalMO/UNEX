@@ -17,4 +17,10 @@ export const APIS = {
   UTILS: {
     LINKS: `${baseUrl}redirections/get`,
   },
+  CART: {
+    ADD: `${baseUrl}cart/add`,
+    GET: `${baseUrl}cart/getuser`,
+    DELETE: `${baseUrl}cart/delete`,
+    UPDATE: `${baseUrl}cart/update`,
+  },
 };

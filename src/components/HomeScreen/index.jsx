@@ -23,7 +23,7 @@ function HomeScreen() {
   // const { data, loading, error } = useQuery( GET_HOME_DATA );
 
   const loading = false;
-  const { t } = useTranslation("home");
+  const { t } = useTranslation("common");
 
   return (
     <div
@@ -33,9 +33,7 @@ function HomeScreen() {
     >
       <ImageBanner />
 
-
       <div className="container banners">
-     
         <div className="row">
           <div className="col-sm-12 col-lg-3">
             <Reveal
@@ -44,8 +42,6 @@ function HomeScreen() {
               duration={1000}
               triggerOnce
             >
-
-
               <div className="banner banner-hover lazy-media height-1 banner-overlay">
                 <figure className="mb-0">
                   <div className="lazy-overlay"></div>
@@ -67,11 +63,12 @@ function HomeScreen() {
                         pathname: "/shop/3cols",
                       }}
                     >
-                      Tops
+                      {t("TOPS", { ns: "common" })}
                     </ALink>
                   </h3>
                   <ALink href="/shop/3cols" className="banner-link">
-                    Shop Now <i className="icon-long-arrow-right"></i>
+                    {t("SHOP", { ns: "common" })}
+                    <i className="icon-long-arrow-right"></i>
                   </ALink>
                 </div>
               </div>
@@ -104,11 +101,12 @@ function HomeScreen() {
                         pathname: "/shop/3cols",
                       }}
                     >
-                      All Men
+                      {t("ALL_MEN", { ns: "common" })}
                     </ALink>
                   </h3>
                   <ALink href="/shop/3cols" className="banner-link">
-                    Shop Now <i className="icon-long-arrow-right"></i>
+                    {t("SHOP", { ns: "common" })}
+                    <i className="icon-long-arrow-right"></i>
                   </ALink>
                 </div>
               </div>
@@ -121,8 +119,6 @@ function HomeScreen() {
               duration={1000}
               triggerOnce
             >
-
-
               <div className="banner banner-hover lazy-media height-1 banner-overlay">
                 <figure className="mb-0">
                   <div className="lazy-overlay"></div>
@@ -144,26 +140,26 @@ function HomeScreen() {
                         pathname: "/shop/3cols",
                       }}
                     >
-                      Bottoms
+                      {t("BOTTOMS", { ns: "common" })}
                     </ALink>
                   </h3>
                   <ALink href="/shop/3cols" className="banner-link">
-                    Shop Now <i className="icon-long-arrow-right"></i>
+                    {t("SHOP", { ns: "common" })}
+                    <i className="icon-long-arrow-right"></i>
                   </ALink>
                 </div>
               </div>
             </Reveal>
           </div>
-          
-
-      
         </div>
       </div>
 
       <div className="bg-lighter pt-5 pb-5">
         <div className="container">
           <div className="heading text-center">
-            <h2 className="title">Let Us Inspire You On Instagram</h2>
+            <h2 className="title">
+              {t("INSTAGRAM_INSPIRE", { ns: "common" })}
+            </h2>
             <p className="title-desc">
               Donec nec justo eget felis facilisis fermentum.
             </p>

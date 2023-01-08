@@ -12,15 +12,14 @@ import axiosInstance from "~/src/utils/axios/axiosInstance";
 import { useRouter } from "next/router";
 
 const WrappedApp = ({ Component, pageProps }) => {
-  const router = useRouter()
-  const { i18n, }=useTranslation()
+  const router = useRouter();
+  const { i18n } = useTranslation();
   useEffect(() => {
-    document.body.dir = i18n?.dir?.() ?? 'en';
-    
-    axiosInstance.defaults.headers.common["accept-language"] = router.locale;
+    document.body.dir = i18n?.dir?.() ?? "en";
 
+    axiosInstance.defaults.headers.common["accept-language"] = router.locale;
   }, [i18n]);
-  
+
   return (
     <AuthProvider>
       <Provider store={store}>
@@ -33,10 +32,7 @@ const WrappedApp = ({ Component, pageProps }) => {
           />
           <meta name="author" content="d-themes" />
           <meta name="apple-mobile-web-app-title" content="UNEX" />
-          <meta
-            name="UNEX"
-            content="Unex City Active"
-          />
+          <meta name="UNEX" content="Unex City Active" />
           <meta name="msapplication-TileColor" content="#cc9966" />
           <meta
             name="msapplication-config"
@@ -70,9 +66,7 @@ const WrappedApp = ({ Component, pageProps }) => {
           <link rel="shortcut icon" href="images/icons/favicon.ico" />
         </Helmet>
 
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <Component {...pageProps} />
       </Provider>
     </AuthProvider>
   );

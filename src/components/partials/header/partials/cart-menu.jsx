@@ -1,13 +1,24 @@
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import ALink from "~/src/components/features/alink";
 
-import { actions } from "~/store/cart";
-import { cartQtyTotal, cartPriceTotal } from "~/src/utils/shared/index";
+import { cartPriceTotal } from "~/src/utils/shared/index";
 import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
+import { getCart } from "~/src/store/cart";
 
 function CartMenu(props) {
-  const { cartlist } = props;
+  const { cartList } = props;
+  console.log({ cartList });
+
+  const getCartTotalPrice = (cart) => {
+    let total = 0;
+    for (let i = 0; i < cart.length; i++) {
+      if (cart[i].discountedPrice) total += cart[i].discountedPrice;
+      else total += cart[i].price;
+    }
+    return total;
+  };
 
   return (
     <div className="dropdown cart-dropdown">
@@ -21,20 +32,20 @@ function CartMenu(props) {
         data-display="static"
       >
         <i className="icon-shopping-cart"></i>
-        <span className="cart-count">{cartQtyTotal(cartlist)}</span>
+        <span className="cart-count">{cartList.length}</span>
       </ALink>
 
       <div
         className={`dropdown-menu dropdown-menu-right ${
-          cartlist.length === 0 ? "text-center" : ""
+          cartList.length === 0 ? "text-center" : ""
         }`}
       >
-        {0 === cartlist.length ? (
+        {0 === cartList.length ? (
           <p>No products in the cart.</p>
         ) : (
           <>
             <div className="dropdown-cart-products">
-              {cartlist.map((item, index) => (
+              {cartList.map((item, index) => (
                 <div className="product justify-content-between" key={index}>
                   <div className="product-cart-details">
                     <h4 className="product-title">
@@ -44,27 +55,13 @@ function CartMenu(props) {
                     </h4>
 
                     <span className="cart-product-info">
-                      <span className="cart-product-qty">{item.qty} </span>x $
-                      {item.sale_price
-                        ? item.sale_price.toFixed(2)
+                      <span className="cart-product-qty">{item.count} </span>x $
+                      {item.discountedPrice
+                        ? item.discountedPrice.toFixed(2)
                         : item.price.toFixed(2)}
                     </span>
                   </div>
 
-                  <figure className="product-image-container ml-2">
-                    <ALink
-                      href={`/product/default/${item.slug}`}
-                      className="product-image"
-                    >
-                      <img
-                        src={
-                          process.env.NEXT_PUBLIC_ASSET_URI +
-                          item.sm_pictures[0]
-                        }
-                        alt="product"
-                      />
-                    </ALink>
-                  </figure>
                   <button
                     className="btn-remove"
                     title="Remove Product"
@@ -79,11 +76,7 @@ function CartMenu(props) {
               <span>Total</span>
 
               <span className="cart-total-price">
-                $
-                {cartPriceTotal(cartlist).toLocaleString(undefined, {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                })}
+                ${getCartTotalPrice(cartList)}
               </span>
             </div>
 
@@ -106,10 +99,4 @@ function CartMenu(props) {
   );
 }
 
-function mapStateToProps(state) {
-  return {
-    cartlist: [],
-  };
-}
-
-export default connect(mapStateToProps, { ...actions })(CartMenu);
+export default CartMenu;

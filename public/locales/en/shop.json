@@ -1,0 +1,21 @@
+{
+  "SHOP": "Shop",
+  "CATEGORY": "Category",
+  "FILTERS": "Filters",
+  "SIZE": "Size",
+  "COLOR": "Color",
+  "PRICE": "Price",
+  "SORT_BY": "Sort by:",
+  "REVIEWS": "Reviews",
+  "OFF": "OFF",
+  "OUT_OF_STOCK": "Out of Stock",
+  "CLEAN_ALL": "Clean All",
+  "PRICE_RANGE": "Price Range",
+  "FILTER": "Filter",
+  "PRICE_HIGH": "Price high to low",
+  "PRICE_LOW": "Price low to high",
+  "QUANTITY": "Qty",
+  "SIZE_GUIDE": "size guide",
+  "PRODUCT_DESC": "Product Description",
+  "ADD_TO_CART": "Add To Cart"
+}
