@@ -13,7 +13,7 @@ import { APIS } from "~/src/utils/ServiceUrls";
 import { getCart } from "~/src/store/cart";
 import axiosInstance from "~/src/utils/axios/axiosInstance";
 
-function Cart(props) {
+function Cart (props) {
   const dispatch = useDispatch();
   const [cartList, setCartList] = useState([]);
   const [shippingCost, setShippingCost] = useState(0);
@@ -23,7 +23,7 @@ function Cart(props) {
     setCartList(cartItems);
   }, [cartItems]);
 
-  function onChangeShipping(value) {
+  function onChangeShipping (value) {
     setShippingCost(value);
   }
 
@@ -36,7 +36,7 @@ function Cart(props) {
     return total;
   };
 
-  async function changeQty(value, id) {
+  async function changeQty (value, id) {
     await axiosInstance.post(APIS.CART.UPDATE, null, {
       params: {
         id,
@@ -46,7 +46,7 @@ function Cart(props) {
     dispatch(getCart());
   }
 
-  function updateCart(e) {
+  function updateCart (e) {
     let button = e.currentTarget;
     button.querySelector(".icon-refresh").classList.add("load-more-rotating");
 
@@ -94,10 +94,10 @@ function Cart(props) {
                     <table className="table table-cart table-mobile">
                       <thead>
                         <tr>
-                          <th>Product</th>
-                          <th>Price</th>
-                          <th>Quantity</th>
-                          <th>Total</th>
+                          <th style={{textAlign:'start',width:'33%'}}>Product</th>
+                          <th style={{textAlign:'start',width:'20%'}}>Price</th>
+                          <th style={{textAlign:'start',width:'20%'}}>Quantity</th>
+                          <th style={{textAlign:'start',width:'26%'}}>Total</th>
                           <th></th>
                         </tr>
                       </thead>
@@ -106,50 +106,31 @@ function Cart(props) {
                         {cartList.length > 0 ? (
                           cartList.map((item, index) => (
                             <tr key={index}>
-                              <td className="product-col">
-                                <div className="product">
-                                  {/* <figure className="product-media">
-                                    <ALink
-                                      href={`/product/default/${item.slug}`}
-                                      className="product-image"
-                                    >
-                                      <img
-                                        src={
-                                          process.env.NEXT_PUBLIC_ASSET_URI +
-                                          item.sm_pictures[0].url
-                                        }
-                                        alt="product"
-                                      />
-                                    </ALink>
-                                  </figure> */}
-
+                              <td style={{ textAlign: 'start', width: '33%',marginInlineEnd:'5px' }}  className="product-col">
+                                <div className="product" style={{paddingInlineStart:'0px'}}>
                                   <h4 className="product-title">
-                                    {/* <ALink
-                                      href={`/product/default/${item.slug}`}
-                                    > */}
                                     {item.name} sdfsdf
-                                    {/* </ALink> */}
                                   </h4>
                                 </div>
                               </td>
 
-                              <td className="price-col">
+                              <td style={{ textAlign: 'start', width: '20%', marginInlineEnd: '5px' }} className="price-col">
                                 EGP{" "}
                                 {item.discountedPrice
                                   ? item.discountedPrice.toLocaleString(
-                                      undefined,
-                                      {
-                                        minimumFractionDigits: 2,
-                                        maximumFractionDigits: 2,
-                                      }
-                                    )
-                                  : item.price.toLocaleString(undefined, {
+                                    undefined,
+                                    {
                                       minimumFractionDigits: 2,
                                       maximumFractionDigits: 2,
-                                    })}
+                                    }
+                                  )
+                                  : item.price.toLocaleString(undefined, {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2,
+                                  })}
                               </td>
 
-                              <td className="quantity-col">
+                              <td style={{ textAlign: 'start', width: '20%', marginInlineEnd: '5px' }} className="quantity-col">
                                 <Qty
                                   value={item.count}
                                   changeQty={(current) =>
@@ -159,7 +140,7 @@ function Cart(props) {
                                 ></Qty>
                               </td>
 
-                              <td className="total-col">
+                              <td style={{ textAlign: 'start', width: '26%', marginInlineEnd: '5px' }} className="total-col">
                                 {(
                                   item.discountedPrice * item.count
                                 ).toLocaleString(undefined, {
