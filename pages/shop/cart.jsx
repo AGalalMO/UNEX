@@ -13,7 +13,7 @@ import axiosInstance from "~/src/utils/axios/axiosInstance";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 
-function Cart(props) {
+function Cart (props) {
   const dispatch = useDispatch();
   const [cartList, setCartList] = useState([]);
   const cartItems = useSelector((state) => state.cart.cartList);
@@ -23,6 +23,10 @@ function Cart(props) {
   useEffect(() => {
     setCartList(cartItems);
   }, [cartItems]);
+
+  function onChangeShipping (value) {
+    setShippingCost(value);
+  }
 
   const getCartTotalPrice = (cart) => {
     let total = 0;
@@ -34,7 +38,7 @@ function Cart(props) {
     return total;
   };
 
-  async function changeQty(value, id) {
+  async function changeQty (value, id) {
     await axiosInstance.post(APIS.CART.UPDATE, null, {
       params: {
         id,
@@ -44,7 +48,7 @@ function Cart(props) {
     dispatch(getCart());
   }
 
-  function updateCart(e) {
+  function updateCart (e) {
     let button = e.currentTarget;
     button.querySelector(".icon-refresh").classList.add("load-more-rotating");
 
@@ -158,16 +162,16 @@ function Cart(props) {
                                 {router?.locale == "ar" ? " جم " : " EGP "}
                                 {item.discountedPrice
                                   ? item.discountedPrice.toLocaleString(
-                                      undefined,
-                                      {
-                                        minimumFractionDigits: 2,
-                                        maximumFractionDigits: 2,
-                                      }
-                                    )
-                                  : item.price.toLocaleString(undefined, {
+                                    undefined,
+                                    {
                                       minimumFractionDigits: 2,
                                       maximumFractionDigits: 2,
-                                    })}
+                                    }
+                                  )
+                                  : item.price.toLocaleString(undefined, {
+                                    minimumFractionDigits: 2,
+                                    maximumFractionDigits: 2,
+                                  })}
                               </td>
 
                               <td
