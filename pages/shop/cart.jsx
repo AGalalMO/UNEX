@@ -94,10 +94,10 @@ function Cart (props) {
                     <table className="table table-cart table-mobile">
                       <thead>
                         <tr>
-                          <th style={{textAlign:'start',width:'33%'}}>Product</th>
-                          <th style={{textAlign:'start',width:'20%'}}>Price</th>
-                          <th style={{textAlign:'start',width:'20%'}}>Quantity</th>
-                          <th style={{textAlign:'start',width:'26%'}}>Total</th>
+                          <th style={{textAlign:'start'}}>Product</th>
+                          <th style={{textAlign:'start'}}>Price</th>
+                          <th style={{textAlign:'start'}}>Quantity</th>
+                          <th style={{textAlign:'start'}}>Total</th>
                           <th></th>
                         </tr>
                       </thead>
@@ -106,7 +106,7 @@ function Cart (props) {
                         {cartList.length > 0 ? (
                           cartList.map((item, index) => (
                             <tr key={index}>
-                              <td style={{ textAlign: 'start', width: '33%',marginInlineEnd:'5px' }}  className="product-col">
+                              <td style={{ textAlign: 'start',marginInlineEnd:'5px' }}  className="product-col">
                                 <div className="product" style={{paddingInlineStart:'0px'}}>
                                   <h4 className="product-title">
                                     {item.name} sdfsdf
@@ -114,7 +114,7 @@ function Cart (props) {
                                 </div>
                               </td>
 
-                              <td style={{ textAlign: 'start', width: '20%', marginInlineEnd: '5px' }} className="price-col">
+                              <td style={{ textAlign: 'start', marginInlineEnd: '5px' }} className="price-col">
                                 EGP{" "}
                                 {item.discountedPrice
                                   ? item.discountedPrice.toLocaleString(
@@ -130,7 +130,7 @@ function Cart (props) {
                                   })}
                               </td>
 
-                              <td style={{ textAlign: 'start', width: '20%', marginInlineEnd: '5px' }} className="quantity-col">
+                              <td style={{ textAlign: 'start', marginInlineEnd: '5px' }} className="quantity-col">
                                 <Qty
                                   value={item.count}
                                   changeQty={(current) =>
@@ -140,7 +140,7 @@ function Cart (props) {
                                 ></Qty>
                               </td>
 
-                              <td style={{ textAlign: 'start', width: '26%', marginInlineEnd: '5px' }} className="total-col">
+                              <td style={{ textAlign: 'start', marginInlineEnd: '5px' }} className="total-col">
                                 {(
                                   item.discountedPrice * item.count
                                 ).toLocaleString(undefined, {
