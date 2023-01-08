@@ -26,11 +26,8 @@
   "MONEY_BACK": "ضمان استعادة الاموال",
   "RETURNS": "عائدات",
   "TERMS_AND_CONDITIONS": "الأحكام والشروط",
-  "CHECKOUT": "الدفع",
-  "PRIVACY_POLICY": "سياسة الخصوصية",
-  "SHOPPING_CART": "عربة التسوق",
+  
   "MY_ORDERS": "طلباتي",
-  "CHECKOUT": "الدفع",
   "ORDER": "الطلب",
   "VIEW_CART": "مشاهدة العربة",
   "TOTAL": "الاجمالي",
@@ -57,5 +54,8 @@
   "OutForDelivery": "خرج للتوصيل",
   "Delivered": "تم التوصيل",
   "Canceled": "تم الالغاء",
-  "cancel": "الغاء الطلب"
+  "cancel": "الغاء الطلب",
+  "SHOPPING_CART": "عربة التسوق",
+  "CHECKOUT": "الدفع",
+  "PRIVACY_POLICY": "سياسة الخصوصية"
 }
