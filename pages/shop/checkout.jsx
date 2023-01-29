@@ -222,7 +222,7 @@ function Checkout(props) {
 export const getStaticProps = async ({ locale }) => {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "about"])),
+      ...(await serverSideTranslations(locale, ["checkout", "about"])),
     },
   };
 };

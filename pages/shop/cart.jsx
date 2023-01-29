@@ -10,12 +10,14 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { APIS } from "~/src/utils/ServiceUrls";
 import { getCart } from "~/src/store/cart";
 import axiosInstance from "~/src/utils/axios/axiosInstance";
+import { useTranslation } from "next-i18next";
 
 function Cart(props) {
   const dispatch = useDispatch();
   const [cartList, setCartList] = useState([]);
   const [shippingCost, setShippingCost] = useState(0);
   const cartItems = useSelector((state) => state.cart.cartList);
+  const { t } = useTranslation(["cart", "common"]);
 
   useEffect(() => {
     setCartList(cartItems);
@@ -74,12 +76,16 @@ function Cart(props) {
           <div className="container">
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
-                <ALink href="/">Home</ALink>
+                <ALink href="/">{t("HOME", { ns: "common" })}</ALink>
               </li>
               <li className="breadcrumb-item">
-                <ALink href="/shop/sidebar/list">Shop</ALink>
+                <ALink href="/shop/sidebar/list">
+                  {t("SHOP", { ns: "common" })}
+                </ALink>
               </li>
-              <li className="breadcrumb-item active">Shopping Cart</li>
+              <li className="breadcrumb-item active">
+                {t("SHOPPING_CART", { ns: "common" })}
+              </li>
             </ol>
           </div>
         </nav>
@@ -93,11 +99,13 @@ function Cart(props) {
                     <table className="table table-cart table-mobile">
                       <thead>
                         <tr>
-                          <th style={{ textAlign: "start" }}>Product</th>
-                          <th style={{ textAlign: "start" }}>size</th>
-                          <th style={{ textAlign: "start" }}>Price</th>
-                          <th style={{ textAlign: "start" }}>Quantity</th>
-                          <th style={{ textAlign: "start" }}>Total</th>
+                          <th style={{ textAlign: "start" }}>{t("PRODUCT")}</th>
+                          <th style={{ textAlign: "start" }}>{t("SIZE")}</th>
+                          <th style={{ textAlign: "start" }}>{t("PRICE")}</th>
+                          <th style={{ textAlign: "start" }}>
+                            {t("QUANTITY")}
+                          </th>
+                          <th style={{ textAlign: "start" }}>{t("TOTAL")}</th>
                           <th></th>
                         </tr>
                       </thead>
@@ -197,7 +205,7 @@ function Cart(props) {
                             <td>
                               <p className="pl-2 pt-1 pb-1">
                                 {" "}
-                                No Products in Cart{" "}
+                                {t("NO_PRODUCTS")}{" "}
                               </p>
                             </td>
                           </tr>
@@ -207,16 +215,16 @@ function Cart(props) {
                   </div>
                   <aside className="col-lg-3">
                     <div className="summary summary-cart">
-                      <h3 className="summary-title">Cart Total</h3>
+                      <h3 className="summary-title">{t("CART_TOTAL")}</h3>
 
                       <table className="table table-summary">
                         <tbody>
                           <tr className="summary-subtotal">
-                            <td>Subtotal:</td>
+                            <td>{t("TOTAL")}</td>
                             <td>EGP {getCartTotalPrice(cartList)}</td>
                           </tr>
                           <tr className="summary-shipping">
-                            <td>Shipping:</td>
+                            <td>{t("SHIPPING")}:</td>
                             <td>&nbsp;</td>
                           </tr>
 
@@ -285,7 +293,7 @@ function Cart(props) {
                           </tr>
 
                           <tr className="summary-total">
-                            <td>Total:</td>
+                            <td>{t("TOTAL")}</td>
                             <td>
                               {getCartTotalPrice(cartList) + shippingCost}
                             </td>
@@ -297,7 +305,7 @@ function Cart(props) {
                         className="btn btn-outline-primary-2 btn-order btn-block"
                         href="/shop/checkout"
                       >
-                        PROCEED TO CHECKOUT
+                        {t("PROCEED_TO")}
                       </ALink>
                     </div>
                   </aside>
@@ -336,7 +344,7 @@ function Cart(props) {
 export const getStaticProps = async ({ locale }) => {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ["common", "about"])),
+      ...(await serverSideTranslations(locale, ["common", "cart"])),
     },
   };
 };
