@@ -162,16 +162,16 @@ function Cart (props) {
                                 {router?.locale == "ar" ? " جم " : " EGP "}
                                 {item.discountedPrice
                                   ? item.discountedPrice.toLocaleString(
-                                    undefined,
-                                    {
+                                      undefined,
+                                      {
+                                        minimumFractionDigits: 2,
+                                        maximumFractionDigits: 2,
+                                      }
+                                    )
+                                  : item.price.toLocaleString(undefined, {
                                       minimumFractionDigits: 2,
                                       maximumFractionDigits: 2,
-                                    }
-                                  )
-                                  : item.price.toLocaleString(undefined, {
-                                    minimumFractionDigits: 2,
-                                    maximumFractionDigits: 2,
-                                  })}
+                                    })}
                               </td>
 
                               <td
