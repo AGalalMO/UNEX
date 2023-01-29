@@ -90,13 +90,13 @@ function Cart (props) {
           </div>
         </nav>
 
-        <div className="page-content pb-5">
-          <div className="cart">
-            <div className="container">
+        <div className='page-content pb-5'>
+          <div className='cart'>
+            <div className='container'>
               {true ? (
-                <div className="row">
-                  <div className="col-lg-9">
-                    <table className="table table-cart table-mobile">
+                <div className='row'>
+                  <div className='col-lg-9'>
+                    <table className='table table-cart table-mobile'>
                       <thead>
                         <tr>
                           <th style={{ textAlign: "start" }}>{t("PRODUCT")}</th>
@@ -147,16 +147,16 @@ function Cart (props) {
                                 EGP{" "}
                                 {item.discountedPrice
                                   ? item.discountedPrice.toLocaleString(
-                                    undefined,
-                                    {
+                                      undefined,
+                                      {
+                                        minimumFractionDigits: 2,
+                                        maximumFractionDigits: 2,
+                                      }
+                                    )
+                                  : item.price.toLocaleString(undefined, {
                                       minimumFractionDigits: 2,
                                       maximumFractionDigits: 2,
-                                    }
-                                  )
-                                  : item.price.toLocaleString(undefined, {
-                                    minimumFractionDigits: 2,
-                                    maximumFractionDigits: 2,
-                                  })}
+                                    })}
                               </td>
 
                               <td
@@ -171,8 +171,7 @@ function Cart (props) {
                                   changeQty={(current) =>
                                     changeQty(current, item.cartId)
                                   }
-                                  adClass="cart-product-quantity"
-                                ></Qty>
+                                  adClass='cart-product-quantity'></Qty>
                               </td>
 
                               <td
@@ -190,12 +189,11 @@ function Cart (props) {
                                 })}
                               </td>
 
-                              <td className="remove-col">
+                              <td className='remove-col'>
                                 <button
-                                  className="btn-remove"
-                                  onClick={() => removeFromCart(item.cartId)}
-                                >
-                                  <i className="icon-close"></i>
+                                  className='btn-remove'
+                                  onClick={() => removeFromCart(item.cartId)}>
+                                  <i className='icon-close'></i>
                                 </button>
                               </td>
                             </tr>
@@ -203,7 +201,7 @@ function Cart (props) {
                         ) : (
                           <tr>
                             <td>
-                              <p className="pl-2 pt-1 pb-1">
+                              <p className='pl-2 pt-1 pb-1'>
                                 {" "}
                                 {t("NO_PRODUCTS")}{" "}
                               </p>
@@ -217,7 +215,7 @@ function Cart (props) {
                     <div className="summary summary-cart">
                       <h3 className="summary-title">{t("CART_TOTAL")}</h3>
 
-                      <table className="table table-summary">
+                      <table className='table table-summary'>
                         <tbody>
                           <tr className="summary-subtotal">
                             <td>{t("TOTAL")}</td>
@@ -228,21 +226,20 @@ function Cart (props) {
                             <td>&nbsp;</td>
                           </tr>
 
-                          <tr className="summary-shipping-row">
+                          <tr className='summary-shipping-row'>
                             <td>
-                              <div className="custom-control custom-radio">
+                              <div className='custom-control custom-radio'>
                                 <input
-                                  type="radio"
-                                  id="free-shipping"
-                                  name="shipping"
-                                  className="custom-control-input"
+                                  type='radio'
+                                  id='free-shipping'
+                                  name='shipping'
+                                  className='custom-control-input'
                                   onChange={(e) => onChangeShipping(0)}
                                   defaultChecked={true}
                                 />
                                 <label
-                                  className="custom-control-label"
-                                  htmlFor="free-shipping"
-                                >
+                                  className='custom-control-label'
+                                  htmlFor='free-shipping'>
                                   Free Shipping
                                 </label>
                               </div>
@@ -250,20 +247,19 @@ function Cart (props) {
                             <td>EGP 0.00</td>
                           </tr>
 
-                          <tr className="summary-shipping-row">
+                          <tr className='summary-shipping-row'>
                             <td>
-                              <div className="custom-control custom-radio">
+                              <div className='custom-control custom-radio'>
                                 <input
-                                  type="radio"
-                                  id="standard-shipping"
-                                  name="shipping"
-                                  className="custom-control-input"
+                                  type='radio'
+                                  id='standard-shipping'
+                                  name='shipping'
+                                  className='custom-control-input'
                                   onChange={(e) => onChangeShipping(10)}
                                 />
                                 <label
-                                  className="custom-control-label"
-                                  htmlFor="standard-shipping"
-                                >
+                                  className='custom-control-label'
+                                  htmlFor='standard-shipping'>
                                   Standard:
                                 </label>
                               </div>
@@ -271,20 +267,19 @@ function Cart (props) {
                             <td>EGP 10.00</td>
                           </tr>
 
-                          <tr className="summary-shipping-row">
+                          <tr className='summary-shipping-row'>
                             <td>
-                              <div className="custom-control custom-radio">
+                              <div className='custom-control custom-radio'>
                                 <input
-                                  type="radio"
-                                  id="express-shipping"
-                                  name="shipping"
-                                  className="custom-control-input"
+                                  type='radio'
+                                  id='express-shipping'
+                                  name='shipping'
+                                  className='custom-control-input'
                                   onChange={(e) => onChangeShipping(20)}
                                 />
                                 <label
-                                  className="custom-control-label"
-                                  htmlFor="express-shipping"
-                                >
+                                  className='custom-control-label'
+                                  htmlFor='express-shipping'>
                                   Express:
                                 </label>
                               </div>
@@ -311,21 +306,19 @@ function Cart (props) {
                   </aside>
                 </div>
               ) : (
-                <div className="row">
-                  <div className="col-12">
-                    <div className="cart-empty-page text-center">
+                <div className='row'>
+                  <div className='col-12'>
+                    <div className='cart-empty-page text-center'>
                       <i
-                        className="cart-empty icon-shopping-cart"
-                        style={{ lineHeight: 1, fontSize: "15rem" }}
-                      ></i>
-                      <p className="px-3 py-2 cart-empty mb-3">
+                        className='cart-empty icon-shopping-cart'
+                        style={{ lineHeight: 1, fontSize: "15rem" }}></i>
+                      <p className='px-3 py-2 cart-empty mb-3'>
                         No products added to the cart
                       </p>
-                      <p className="return-to-shop mb-0">
+                      <p className='return-to-shop mb-0'>
                         <ALink
-                          href="/shop/sidebar/list"
-                          className="btn btn-primary"
-                        >
+                          href='/shop/sidebar/list'
+                          className='btn btn-primary'>
                           RETURN TO SHOP
                         </ALink>
                       </p>
