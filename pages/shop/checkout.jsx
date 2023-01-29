@@ -222,8 +222,84 @@ function Checkout(props) {
                     </div>
                   </aside>
                 </div>
-              </form>
-            </div>
+
+                <aside className="col-lg-3">
+                  <div className="summary">
+                    <h3 className="summary-title">Your Order</h3>
+
+                    <table className="table table-summary">
+                      <thead>
+                        <tr>
+                          <th>Product</th>
+                          <th>Total</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        {cartlist?.map((item, index) => (
+                          <tr key={index}>
+                            <td>
+                              {" "}
+                              <ALink href={`/product/default/${item.slug}`}>
+                                {item.name}
+                              </ALink>
+                            </td>
+                            <td>
+                              {item.discountedPrice
+                                ? item.discountedPrice * item.count
+                                : item.price * item.count}
+                            </td>
+                          </tr>
+                        ))}
+                        <tr className="summary-subtotal">
+                          <td>Subtotal:</td>
+                          <td>
+                            EGP{" "}
+                            {getCartTotalPrice(cartlist).toLocaleString(
+                              undefined,
+                              {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2,
+                              }
+                            )}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Shipping:</td>
+                          <td>Free Shipping</td>
+                        </tr>
+                        <tr className="summary-total">
+                          <td>Total:</td>
+                          <td>
+                            EGP{" "}
+                            {getCartTotalPrice(cartlist).toLocaleString(
+                              undefined,
+                              {
+                                minimumFractionDigits: 2,
+                                maximumFractionDigits: 2,
+                              }
+                            )}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <Accordion type="checkout">
+                      <Card disabled={true} title="Cash on delivery"></Card>
+                    </Accordion>
+
+                    <button
+                      type="submit"
+                      className="btn btn-outline-primary-2 btn-order btn-block"
+                      onClick={placeOrder}
+                    >
+                      <span className="btn-text">Place Order</span>
+                      <span className="btn-hover-text">Place Order</span>
+                    </button>
+                  </div>
+                </aside>
+              </div>
+            </form>
           </div>
         </div>
       </div>
