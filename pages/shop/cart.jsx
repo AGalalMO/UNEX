@@ -13,7 +13,7 @@ import axiosInstance from "~/src/utils/axios/axiosInstance";
 import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 
-function Cart (props) {
+function Cart(props) {
   const dispatch = useDispatch();
   const [cartList, setCartList] = useState([]);
   const cartItems = useSelector((state) => state.cart.cartList);
@@ -24,7 +24,7 @@ function Cart (props) {
     setCartList(cartItems);
   }, [cartItems]);
 
-  function onChangeShipping (value) {
+  function onChangeShipping(value) {
     setShippingCost(value);
   }
 
@@ -38,7 +38,7 @@ function Cart (props) {
     return total;
   };
 
-  async function changeQty (value, id) {
+  async function changeQty(value, id) {
     await axiosInstance.post(APIS.CART.UPDATE, null, {
       params: {
         id,
@@ -48,7 +48,7 @@ function Cart (props) {
     dispatch(getCart());
   }
 
-  function updateCart (e) {
+  function updateCart(e) {
     let button = e.currentTarget;
     button.querySelector(".icon-refresh").classList.add("load-more-rotating");
 
@@ -93,13 +93,13 @@ function Cart (props) {
           </div>
         </nav>
 
-        <div className='page-content pb-5'>
-          <div className='cart'>
-            <div className='container'>
+        <div className="page-content pb-5">
+          <div className="cart">
+            <div className="container">
               {true ? (
-                <div className='row'>
-                  <div className='col-lg-9'>
-                    <table className='table table-cart table-mobile'>
+                <div className="row">
+                  <div className="col-lg-9">
+                    <table className="table table-cart table-mobile">
                       <thead>
                         <tr>
                           <th style={{ textAlign: "start" }}>{t("PRODUCT")}</th>
@@ -185,7 +185,8 @@ function Cart (props) {
                                   changeQty={(current) =>
                                     changeQty(current, item.cartId)
                                   }
-                                  adClass='cart-product-quantity'></Qty>
+                                  adClass="cart-product-quantity"
+                                ></Qty>
                               </td>
 
                               <td
@@ -202,11 +203,12 @@ function Cart (props) {
                                 })}
                               </td>
 
-                              <td className='remove-col'>
+                              <td className="remove-col">
                                 <button
-                                  className='btn-remove'
-                                  onClick={() => removeFromCart(item.cartId)}>
-                                  <i className='icon-close'></i>
+                                  className="btn-remove"
+                                  onClick={() => removeFromCart(item.cartId)}
+                                >
+                                  <i className="icon-close"></i>
                                 </button>
                               </td>
                             </tr>
@@ -214,7 +216,7 @@ function Cart (props) {
                         ) : (
                           <tr>
                             <td>
-                              <p className='pl-2 pt-1 pb-1'>
+                              <p className="pl-2 pt-1 pb-1">
                                 {" "}
                                 {t("NO_PRODUCTS")}{" "}
                               </p>
@@ -228,7 +230,7 @@ function Cart (props) {
                     <div className='summary summary-cart'>
                       <h3 className='summary-title'>{t("CART_TOTAL")}</h3>
 
-                      <table className='table table-summary'>
+                      <table className="table table-summary">
                         <tbody>
                           <tr className='summary-total'>
                             <td>{t("TOTAL")}</td>
@@ -251,9 +253,9 @@ function Cart (props) {
                   </aside>
                 </div>
               ) : (
-                <div className='row'>
-                  <div className='col-12'>
-                    <div className='cart-empty-page text-center'>
+                <div className="row">
+                  <div className="col-12">
+                    <div className="cart-empty-page text-center">
                       <i
                         className='cart-empty icon-shopping-cart'
                         style={{ lineHeight: 1, fontSize: "15rem" }}></i>
