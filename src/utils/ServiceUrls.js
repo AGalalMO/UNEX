@@ -23,4 +23,7 @@ export const APIS = {
     DELETE: `${baseUrl}cart/delete`,
     UPDATE: `${baseUrl}cart/update`,
   },
+  ORDER: {
+    PLACE_ORDER: `${baseUrl}order/makeorder`,
+  },
 };
