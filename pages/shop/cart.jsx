@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import ALink from "~/src/components/features/alink";
 import Qty from "~/src/components/features/qty";
 import PageHeader from "~/src/components/features/page-header";
 
-import { actions as cartAction } from "~/store/cart";
-import { cartPriceTotal } from "~/src/utils/shared/index";
 import Layout from "~/src/components/layout";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { APIS } from "~/src/utils/ServiceUrls";
@@ -69,35 +67,36 @@ function Cart (props) {
 
   return (
     <Layout>
-      <div className="main">
-        <PageHeader title="Shopping Cart" subTitle="Shop" />
-        <nav className="breadcrumb-nav">
-          <div className="container">
-            <ol className="breadcrumb">
-              <li className="breadcrumb-item">
-                <ALink href="/">Home</ALink>
+      <div className='main'>
+        <PageHeader title='Shopping Cart' subTitle='Shop' />
+        <nav className='breadcrumb-nav'>
+          <div className='container'>
+            <ol className='breadcrumb'>
+              <li className='breadcrumb-item'>
+                <ALink href='/'>Home</ALink>
               </li>
-              <li className="breadcrumb-item">
-                <ALink href="/shop/sidebar/list">Shop</ALink>
+              <li className='breadcrumb-item'>
+                <ALink href='/shop/sidebar/list'>Shop</ALink>
               </li>
-              <li className="breadcrumb-item active">Shopping Cart</li>
+              <li className='breadcrumb-item active'>Shopping Cart</li>
             </ol>
           </div>
         </nav>
 
-        <div className="page-content pb-5">
-          <div className="cart">
-            <div className="container">
+        <div className='page-content pb-5'>
+          <div className='cart'>
+            <div className='container'>
               {true ? (
-                <div className="row">
-                  <div className="col-lg-9">
-                    <table className="table table-cart table-mobile">
+                <div className='row'>
+                  <div className='col-lg-9'>
+                    <table className='table table-cart table-mobile'>
                       <thead>
                         <tr>
-                          <th style={{textAlign:'start'}}>Product</th>
-                          <th style={{textAlign:'start'}}>Price</th>
-                          <th style={{textAlign:'start'}}>Quantity</th>
-                          <th style={{textAlign:'start'}}>Total</th>
+                          <th style={{ textAlign: "start" }}>Product</th>
+                          <th style={{ textAlign: "start" }}>size</th>
+                          <th style={{ textAlign: "start" }}>Price</th>
+                          <th style={{ textAlign: "start" }}>Quantity</th>
+                          <th style={{ textAlign: "start" }}>Total</th>
                           <th></th>
                         </tr>
                       </thead>
@@ -106,41 +105,69 @@ function Cart (props) {
                         {cartList.length > 0 ? (
                           cartList.map((item, index) => (
                             <tr key={index}>
-                              <td style={{ textAlign: 'start',marginInlineEnd:'5px' }}  className="product-col">
-                                <div className="product" style={{paddingInlineStart:'0px'}}>
-                                  <h4 className="product-title">
+                              <td
+                                style={{
+                                  textAlign: "start",
+                                  marginInlineEnd: "5px",
+                                }}
+                                className='product-col'>
+                                <div
+                                  className='product'
+                                  style={{ paddingInlineStart: "0px" }}>
+                                  <h4 className='product-title'>
                                     {item.name} sdfsdf
                                   </h4>
                                 </div>
                               </td>
-
-                              <td style={{ textAlign: 'start', marginInlineEnd: '5px' }} className="price-col">
+                              <td
+                                style={{
+                                  textAlign: "start",
+                                  marginInlineEnd: "5px",
+                                }}
+                                className='size-col'>
+                                {item.size}
+                              </td>
+                              <td
+                                style={{
+                                  textAlign: "start",
+                                  marginInlineEnd: "5px",
+                                }}
+                                className='price-col'>
                                 EGP{" "}
                                 {item.discountedPrice
                                   ? item.discountedPrice.toLocaleString(
-                                    undefined,
-                                    {
+                                      undefined,
+                                      {
+                                        minimumFractionDigits: 2,
+                                        maximumFractionDigits: 2,
+                                      }
+                                    )
+                                  : item.price.toLocaleString(undefined, {
                                       minimumFractionDigits: 2,
                                       maximumFractionDigits: 2,
-                                    }
-                                  )
-                                  : item.price.toLocaleString(undefined, {
-                                    minimumFractionDigits: 2,
-                                    maximumFractionDigits: 2,
-                                  })}
+                                    })}
                               </td>
 
-                              <td style={{ textAlign: 'start', marginInlineEnd: '5px' }} className="quantity-col">
+                              <td
+                                style={{
+                                  textAlign: "start",
+                                  marginInlineEnd: "5px",
+                                }}
+                                className='quantity-col'>
                                 <Qty
                                   value={item.count}
                                   changeQty={(current) =>
                                     changeQty(current, item.cartId)
                                   }
-                                  adClass="cart-product-quantity"
-                                ></Qty>
+                                  adClass='cart-product-quantity'></Qty>
                               </td>
 
-                              <td style={{ textAlign: 'start', marginInlineEnd: '5px' }} className="total-col">
+                              <td
+                                style={{
+                                  textAlign: "start",
+                                  marginInlineEnd: "5px",
+                                }}
+                                className='total-col'>
                                 {(
                                   item.discountedPrice * item.count
                                 ).toLocaleString(undefined, {
@@ -149,12 +176,11 @@ function Cart (props) {
                                 })}
                               </td>
 
-                              <td className="remove-col">
+                              <td className='remove-col'>
                                 <button
-                                  className="btn-remove"
-                                  onClick={() => removeFromCart(item.cartId)}
-                                >
-                                  <i className="icon-close"></i>
+                                  className='btn-remove'
+                                  onClick={() => removeFromCart(item.cartId)}>
+                                  <i className='icon-close'></i>
                                 </button>
                               </td>
                             </tr>
@@ -162,7 +188,7 @@ function Cart (props) {
                         ) : (
                           <tr>
                             <td>
-                              <p className="pl-2 pt-1 pb-1">
+                              <p className='pl-2 pt-1 pb-1'>
                                 {" "}
                                 No Products in Cart{" "}
                               </p>
@@ -172,36 +198,35 @@ function Cart (props) {
                       </tbody>
                     </table>
                   </div>
-                  <aside className="col-lg-3">
-                    <div className="summary summary-cart">
-                      <h3 className="summary-title">Cart Total</h3>
+                  <aside className='col-lg-3'>
+                    <div className='summary summary-cart'>
+                      <h3 className='summary-title'>Cart Total</h3>
 
-                      <table className="table table-summary">
+                      <table className='table table-summary'>
                         <tbody>
-                          <tr className="summary-subtotal">
+                          <tr className='summary-subtotal'>
                             <td>Subtotal:</td>
                             <td>EGP {getCartTotalPrice(cartList)}</td>
                           </tr>
-                          <tr className="summary-shipping">
+                          <tr className='summary-shipping'>
                             <td>Shipping:</td>
                             <td>&nbsp;</td>
                           </tr>
 
-                          <tr className="summary-shipping-row">
+                          <tr className='summary-shipping-row'>
                             <td>
-                              <div className="custom-control custom-radio">
+                              <div className='custom-control custom-radio'>
                                 <input
-                                  type="radio"
-                                  id="free-shipping"
-                                  name="shipping"
-                                  className="custom-control-input"
+                                  type='radio'
+                                  id='free-shipping'
+                                  name='shipping'
+                                  className='custom-control-input'
                                   onChange={(e) => onChangeShipping(0)}
                                   defaultChecked={true}
                                 />
                                 <label
-                                  className="custom-control-label"
-                                  htmlFor="free-shipping"
-                                >
+                                  className='custom-control-label'
+                                  htmlFor='free-shipping'>
                                   Free Shipping
                                 </label>
                               </div>
@@ -209,20 +234,19 @@ function Cart (props) {
                             <td>EGP 0.00</td>
                           </tr>
 
-                          <tr className="summary-shipping-row">
+                          <tr className='summary-shipping-row'>
                             <td>
-                              <div className="custom-control custom-radio">
+                              <div className='custom-control custom-radio'>
                                 <input
-                                  type="radio"
-                                  id="standard-shipping"
-                                  name="shipping"
-                                  className="custom-control-input"
+                                  type='radio'
+                                  id='standard-shipping'
+                                  name='shipping'
+                                  className='custom-control-input'
                                   onChange={(e) => onChangeShipping(10)}
                                 />
                                 <label
-                                  className="custom-control-label"
-                                  htmlFor="standard-shipping"
-                                >
+                                  className='custom-control-label'
+                                  htmlFor='standard-shipping'>
                                   Standard:
                                 </label>
                               </div>
@@ -230,20 +254,19 @@ function Cart (props) {
                             <td>EGP 10.00</td>
                           </tr>
 
-                          <tr className="summary-shipping-row">
+                          <tr className='summary-shipping-row'>
                             <td>
-                              <div className="custom-control custom-radio">
+                              <div className='custom-control custom-radio'>
                                 <input
-                                  type="radio"
-                                  id="express-shipping"
-                                  name="shipping"
-                                  className="custom-control-input"
+                                  type='radio'
+                                  id='express-shipping'
+                                  name='shipping'
+                                  className='custom-control-input'
                                   onChange={(e) => onChangeShipping(20)}
                                 />
                                 <label
-                                  className="custom-control-label"
-                                  htmlFor="express-shipping"
-                                >
+                                  className='custom-control-label'
+                                  htmlFor='express-shipping'>
                                   Express:
                                 </label>
                               </div>
@@ -251,18 +274,18 @@ function Cart (props) {
                             <td>EGP 20.00</td>
                           </tr>
 
-                          <tr className="summary-shipping-estimate">
+                          <tr className='summary-shipping-estimate'>
                             <td>
                               Estimate for Your Country
                               <br />{" "}
-                              <ALink href="/shop/dashboard">
+                              <ALink href='/shop/dashboard'>
                                 Change address
                               </ALink>
                             </td>
                             <td>&nbsp;</td>
                           </tr>
 
-                          <tr className="summary-total">
+                          <tr className='summary-total'>
                             <td>Total:</td>
                             <td>EGP {getCartTotalPrice(cartList)}</td>
                           </tr>
@@ -270,38 +293,34 @@ function Cart (props) {
                       </table>
 
                       <ALink
-                        className="btn btn-outline-primary-2 btn-order btn-block"
-                        href="/shop/checkout"
-                      >
+                        className='btn btn-outline-primary-2 btn-order btn-block'
+                        href='/shop/checkout'>
                         PROCEED TO CHECKOUT
                       </ALink>
                     </div>
 
                     <ALink
-                      href="/shop/sidebar/list"
-                      className="btn btn-outline-dark-2 btn-block mb-3"
-                    >
+                      href='/shop/sidebar/list'
+                      className='btn btn-outline-dark-2 btn-block mb-3'>
                       <span>CONTINUE SHOPPING</span>
-                      <i className="icon-refresh"></i>
+                      <i className='icon-refresh'></i>
                     </ALink>
                   </aside>
                 </div>
               ) : (
-                <div className="row">
-                  <div className="col-12">
-                    <div className="cart-empty-page text-center">
+                <div className='row'>
+                  <div className='col-12'>
+                    <div className='cart-empty-page text-center'>
                       <i
-                        className="cart-empty icon-shopping-cart"
-                        style={{ lineHeight: 1, fontSize: "15rem" }}
-                      ></i>
-                      <p className="px-3 py-2 cart-empty mb-3">
+                        className='cart-empty icon-shopping-cart'
+                        style={{ lineHeight: 1, fontSize: "15rem" }}></i>
+                      <p className='px-3 py-2 cart-empty mb-3'>
                         No products added to the cart
                       </p>
-                      <p className="return-to-shop mb-0">
+                      <p className='return-to-shop mb-0'>
                         <ALink
-                          href="/shop/sidebar/list"
-                          className="btn btn-primary"
-                        >
+                          href='/shop/sidebar/list'
+                          className='btn btn-primary'>
                           RETURN TO SHOP
                         </ALink>
                       </p>
