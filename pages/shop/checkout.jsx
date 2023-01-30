@@ -1,9 +1,7 @@
 import { useEffect, useMemo } from "react";
 
-import Accordion from "~/src/components/features/accordion/accordion";
-import Card from "~/src/components/features/accordion/card";
 import PageHeader from "~/src/components/features/page-header";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import ALink from "~/src/components/features/alink";
 
