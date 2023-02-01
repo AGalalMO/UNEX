@@ -12,7 +12,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Layout from "~/src/components/layout";
 import { useTranslation } from "next-i18next";
 
-function ShopGrid({ products, categories }) {
+function ShopGrid ({ products, categories }) {
   const router = useRouter();
   const { t } = useTranslation(["shop", "common"]);
   const type = router.query.type;

@@ -95,7 +95,7 @@ function ProductSix ( props ) {
                         <ALink href={ `/product/default/${product?.slug}` }>
                             <LazyLoadImage
                                 alt="product"
-                                src={  product?.images[0] }
+                                src={  product?.images[0]?.url }
                                 threshold={ 500 }
                                 effect="black and white"
                                 wrapperClassName="product-image"
@@ -104,7 +104,7 @@ function ProductSix ( props ) {
                                 product?.images.length >= 2 ?
                                     <LazyLoadImage
                                         alt="product"
-                                        src={  product?.images[0] }
+                                        src={  product?.images[0]?.url }
                                         threshold={ 500 }
                                         effect="black and white"
                                         wrapperClassName="product-image-hover"
