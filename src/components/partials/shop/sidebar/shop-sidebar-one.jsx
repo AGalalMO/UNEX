@@ -66,32 +66,30 @@ function ShopSidebarOne(props) {
   return (
     <>
       <aside
-        className={`${toggle ? "sidebar-filter" : "sidebar"} sidebar-shop`}
-      >
+        className={`${toggle ? "sidebar-filter" : "sidebar"} sidebar-shop`}>
         <div className={toggle ? "sidebar-filter-wrapper" : ""}>
-          <div className="widget widget-clean">
+          <div className='widget widget-clean'>
             <label>{t("FILTERS")}</label>
             <ALink
               href={{ pathname: router.pathname, query: { type: query.type } }}
-              className="sidebar-filter-clear"
+              className='sidebar-filter-clear'
               style={{
                 marginLeft: "0px !important",
                 marginRight: "0px !important",
                 marginInlineStart: "auto !important",
                 marginInlineEnd: "0px !important",
               }}
-              scroll={false}
-            >
+              scroll={false}>
               {t("CLEAN_ALL")}
             </ALink>
           </div>
           <CategoryList categories={categories} query={query} router={router} />
           <SlideToggle collapsed={false}>
             {({ onToggle, setCollapsibleElement, toggleState }) => (
-              <div className="widget widget-collapsible">
-                <h3 className="widget-title mb-2">
+              <div className='widget widget-collapsible'>
+                <h3 className='widget-title mb-2'>
                   <a
-                    href="#Size"
+                    href='#Size'
                     className={`${
                       toggleState.toLowerCase() == "collapsed"
                         ? "collapsed"
@@ -100,20 +98,21 @@ function ShopSidebarOne(props) {
                     onClick={(e) => {
                       onToggle(e);
                       e.preventDefault();
-                    }}
-                  >
+                    }}>
                     {t("SIZE")}
                   </a>
                 </h3>
                 <div ref={setCollapsibleElement}>
-                  <div className="widget-body pt-0">
-                    <div className="filter-items">
+                  <div className='widget-body pt-0'>
+                    <div
+                      style={{ textAlign: "start" }}
+                      className='filter-items'>
                       {shopData.sizes.map((item, index) => (
-                        <div className="filter-item" key={index}>
-                          <div className="custom-control custom-checkbox">
+                        <div className='filter-item' key={index}>
+                          <div className='custom-control custom-checkbox'>
                             <input
-                              type="checkbox"
-                              className="custom-control-input"
+                              type='checkbox'
+                              className='custom-control-input'
                               id={`size-${index + 1}`}
                               onChange={(e) =>
                                 onAttrClick(e, "size", item.slug)
@@ -125,9 +124,8 @@ function ShopSidebarOne(props) {
                               }
                             />
                             <label
-                              className="custom-control-label"
-                              htmlFor={`size-${index + 1}`}
-                            >
+                              className='custom-control-label'
+                              htmlFor={`size-${index + 1}`}>
                               {item.size}
                             </label>
                           </div>
@@ -142,10 +140,10 @@ function ShopSidebarOne(props) {
 
           <SlideToggle collapsed={false}>
             {({ onToggle, setCollapsibleElement, toggleState }) => (
-              <div className="widget widget-collapsible">
-                <h3 className="widget-title mb-2">
+              <div className='widget widget-collapsible'>
+                <h3 className='widget-title mb-2'>
                   <a
-                    href="#colour"
+                    href='#colour'
                     className={`${
                       toggleState.toLowerCase() == "collapsed"
                         ? "collapsed"
@@ -154,14 +152,13 @@ function ShopSidebarOne(props) {
                     onClick={(e) => {
                       onToggle(e);
                       e.preventDefault();
-                    }}
-                  >
+                    }}>
                     {t("COLOR")}
                   </a>
                 </h3>
                 <div ref={setCollapsibleElement}>
-                  <div className="widget-body pt-0">
-                    <div className="filter-colors">
+                  <div className='widget-body pt-0'>
+                    <div className='filter-colors'>
                       {shopData.colors.map((item, index) => (
                         <ALink
                           href={getUrlForAttrs("color", item.color_name)}
@@ -172,9 +169,8 @@ function ShopSidebarOne(props) {
                           }
                           style={{ backgroundColor: item.color }}
                           key={index}
-                          scroll={false}
-                        >
-                          <span className="sr-only">Color Name</span>
+                          scroll={false}>
+                          <span className='sr-only'>Color Name</span>
                         </ALink>
                       ))}
                     </div>
@@ -186,10 +182,10 @@ function ShopSidebarOne(props) {
 
           <SlideToggle collapsed={false}>
             {({ onToggle, setCollapsibleElement, toggleState }) => (
-              <div className="widget widget-collapsible">
-                <h3 className="widget-title mb-2">
+              <div className='widget widget-collapsible'>
+                <h3 className='widget-title mb-2'>
                   <a
-                    href="#price"
+                    href='#price'
                     className={`${
                       toggleState.toLowerCase() == "collapsed"
                         ? "collapsed"
@@ -198,19 +194,18 @@ function ShopSidebarOne(props) {
                     onClick={(e) => {
                       onToggle(e);
                       e.preventDefault();
-                    }}
-                  >
+                    }}>
                     {t("PRICE")}
                   </a>
                 </h3>
 
                 <div ref={setCollapsibleElement}>
-                  <div className="widget-body pt-0">
-                    <div className="filter-price">
-                      <div className="filter-price-text d-flex justify-content-between">
+                  <div className='widget-body pt-0'>
+                    <div className='filter-price'>
+                      <div className='filter-price-text d-flex justify-content-between'>
                         <span>
                           {t("PRICE_RANGE")}:&nbsp;
-                          <span className="filter-price-range">
+                          <span className='filter-price-range'>
                             ${priceRange.min} - ${priceRange.max}
                           </span>
                         </span>
@@ -225,14 +220,13 @@ function ShopSidebarOne(props) {
                               page: 1,
                             },
                           }}
-                          className="pr-2"
-                          scroll={false}
-                        >
+                          className='pr-2'
+                          scroll={false}>
                           {t("FILTER")}
                         </ALink>
                       </div>
 
-                      <div className="price-slider">
+                      <div className='price-slider'>
                         <InputRange
                           formatLabel={(value) => `$${value}`}
                           maxValue={10000}
@@ -261,52 +255,54 @@ const CategoryList = ({ categories, query, router }) => {
   return (
     <SlideToggle collapsed={false}>
       {({ onToggle, setCollapsibleElement, toggleState }) => (
-        <div className="widget widget-collapsible">
-          <h3 className="widget-title mb-2">
+        <div className='widget widget-collapsible'>
+          <h3 className='widget-title mb-2'>
             <a
-              href="#"
+              href='#'
               className={`${
                 toggleState.toLowerCase() == "collapsed" ? "collapsed" : ""
               }`}
               onClick={(e) => {
                 onToggle(e);
                 e.preventDefault();
-              }}
-            >
+              }}>
               {t("CATEGORY")}
             </a>
           </h3>
           <div ref={setCollapsibleElement}>
-            <div className="widget-body pt-0">
-              <div className="filter-items filter-items-count">
+            <div className='widget-body pt-0'>
+              <div
+                style={{
+                  paddingInlineEnd: "4rem",
+                  width: "100%",
+                  textAlign: "start",
+                }}
+                className='filter-items filter-items-count'>
                 {categories.map((item, index) => (
                   <>
                     {item?.subcategories && item?.subcategories?.length > 0 && (
-                      <div className="filter-item" key={`cat_${index}`}>
+                      <div className='filter-item' key={`cat_${index}`}>
                         <ALink
                           className={`${
                             query.category == item.name ? "active" : ""
                           }`}
-                          href="#"
+                          href='#'
                           style={{
                             fontSize: "16px",
                             fontWeight: "400",
                           }}
-                          scroll={false}
-                        >
+                          scroll={false}>
                           {item.name}
                         </ALink>
                         <div
-                          className="mb-2"
-                          style={{ marginInlineStart: "20px" }}
-                        >
+                          className='mb-2'
+                          style={{ marginInlineStart: "20px" }}>
                           {item?.subcategories?.map(
                             (itemSubCategory, subIndex) => (
                               <>
                                 <div
-                                  className="filter-items filter-items-count"
-                                  key={`${itemSubCategory.id}${subIndex}`}
-                                >
+                                  className='filter-items filter-items-count'
+                                  key={`${itemSubCategory.id}${subIndex}`}>
                                   <ALink
                                     className={`${
                                       query.category == itemSubCategory.name
@@ -320,8 +316,7 @@ const CategoryList = ({ categories, query, router }) => {
                                         subCategory: itemSubCategory.name,
                                       },
                                     }}
-                                    scroll={false}
-                                  >
+                                    scroll={false}>
                                     {itemSubCategory.name}
                                   </ALink>
                                 </div>

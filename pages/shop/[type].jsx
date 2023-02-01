@@ -37,7 +37,7 @@ function ShopGrid ({ products, categories }) {
     <Layout>
       <main className='main shop'>
         <PageHeader title={"UNEX"} subTitle={t("SHOP")} />
-        <BreadCrumb query={query} pageTitle={"Shop"} />
+        <BreadCrumb query={query} pageTitle={''} />
         <div className='page-content'>
           <div className='container'>
             <div className='row skeleton-body'>

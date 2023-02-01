@@ -4,7 +4,6 @@ import PageHeader from "~/src/components/features/page-header";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-const MapComponent = ({ text }) => <div>{text}</div>;
 
 function ContactUs() {
   const { t } = useTranslation(["contact", "common"]);

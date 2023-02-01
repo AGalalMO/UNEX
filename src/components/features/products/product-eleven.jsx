@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { connect } from "react-redux";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import ALink from "~/src/components/features/alink";
 
@@ -9,10 +8,14 @@ import { actions as wishlistAction } from "~/store/wishlist";
 import { actions as cartAction } from "~/store/cart";
 import { actions as compareAction } from "~/store/compare";
 import { actions as demoAction } from "~/store/demo";
+import { useTranslation } from "next-i18next";
 
 function ProductEleven(props) {
   const router = useRouter();
   const { product } = props;
+  console.log("product", product);
+  const { t, i18n } = useTranslation(["common"]);
+
   const [outOfStock, setOutOfStock] = useState(false);
   const checkStock = () => {
     let count = 0;
@@ -34,13 +37,17 @@ function ProductEleven(props) {
       <figure className='product-media'>
         {product?.discount ? (
           <span className='product-label label-sale'>
-            {product.discount}% OFF
+            {product.discount}% {t("Sale", { ns: "common" })}
           </span>
         ) : (
-          <span className='product-label label-new'>New Arrival</span>
+          <span className='product-label label-new'>
+            {t("newArrival", { ns: "common" })}
+          </span>
         )}
         {outOfStock ? (
-          <span className='product-label label-out'>Out of Stock</span>
+          <span className='product-label label-out'>
+            {t("outOfStock", { ns: "common" })}
+          </span>
         ) : (
           ""
         )}
@@ -68,11 +75,11 @@ function ProductEleven(props) {
               <ALink
                 href={`/product/${product?.productId}`}
                 className='btn-product btn-cart btn-select'>
-                <span>select options</span>
+                <span>{t("SELECT_OPTIONS", { ns: "common" })}</span>
               </ALink>
             ) : (
               <button className='btn-product btn-cart' onClick={onCartClick}>
-                <span>add to cart</span>
+                <span>{t("Add_To_Cart", { ns: "common" })}</span>
               </button>
             )}
           </div>
@@ -82,13 +89,28 @@ function ProductEleven(props) {
       </figure>
 
       <div className='product-body'>
-        <div className='product-cat'>
+        <div
+          className='product-cat'
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+          }}>
           {product?.info?.map?.((item, index) => (
             <React.Fragment key={item.color + "-" + index}>
               <>
                 {item.count !== 0 && (
                   <>
-                    <span>{item.color}</span>
+                    <span
+                      style={{
+                        backgroundColor: item.color,
+                        display: "block",
+                        borderRadius: "50%",
+                        width: "24px",
+                        height: "24px",
+                      }}
+                    />
                     {index < product?.info?.length - 1 ? ", " : ""}
                   </>
                 )}
@@ -102,18 +124,7 @@ function ProductEleven(props) {
         </h3>
 
         <div className='product-price'>
-          {/* <div className="product-price">${minPrice.toFixed(2)}&ndash;${maxPrice.toFixed(2)}</div> */}
           <span>{product?.price?.toFixed(2)} EGP</span>
-        </div>
-
-        <div className='ratings-container'>
-          <div className='ratings'>
-            <div
-              className='ratings-val'
-              style={{ width: product?.rating * 20 + "%" }}></div>
-            <span className='tooltip-text'>{product?.rating?.toFixed(2)}</span>
-          </div>
-          <span className='ratings-text'>( {product?.review} Reviews )</span>
         </div>
 
         {product?.variants?.length > 0 ? (
@@ -124,7 +135,9 @@ function ProductEleven(props) {
                   href='#'
                   style={{ backgroundColor: item.color }}
                   key={index}>
-                  <span className='sr-only'>Color Name</span>
+                  <span className='sr-only'>
+                    {t("Color", { ns: "common" })}
+                  </span>
                 </ALink>
               ))}
             </div>

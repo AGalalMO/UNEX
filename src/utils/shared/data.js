@@ -316,23 +316,23 @@ export const slideZoomIn = keyframes`{
 export const shopData = {
   sizes: [
     {
-      size: "Extra Small",
+      size: "XS",
       slug: "XS",
     },
     {
-      size: "Small",
+      size: "S",
       slug: "S",
     },
     {
-      size: "Medium",
+      size: "M",
       slug: "M",
     },
     {
-      size: "Large",
+      size: "L",
       slug: "L",
     },
     {
-      size: "Extra Large",
+      size: "XL",
       slug: "XL",
     },
     {

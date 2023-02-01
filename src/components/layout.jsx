@@ -8,9 +8,6 @@ import "react-toastify/dist/ReactToastify.min.css";
 
 import Header from "./partials/header/header";
 import Footer from "./partials/footer/footer";
-import VideoModal from "./features/modals/video-modal";
-import QuickViewModal from "./features/modals/quickview-modal";
-import QuickViewModalTwo from "./features/modals/quickview-modal-two";
 import MobileMenu from "./features/mobile-menu";
 
 import { actions } from "../../store/demo";
@@ -94,9 +91,7 @@ function Layout({ children, hideQuick, hideVideo }) {
         draggable={false}
       />
 
-      {router.pathname === "/" ? <QuickViewModalTwo /> : <QuickViewModal />}
 
-      <VideoModal />
     </>
   );
 }

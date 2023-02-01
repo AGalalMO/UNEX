@@ -1,5 +1,6 @@
 {
   "HOME": "الرئيسية",
+  "NEW_TRENDS": "الموضة الجديدة",
   "SHOP": "تسوق الآن",
   "PRODUCTS": "المنتجات",
   "CONTACT": "تواصل معنا",
@@ -27,5 +28,15 @@
   "CHECKOUT": "الدفع",
   "PRIVACY_POLICY": "سياسة الخصوصية",
   "SHOPPING_CART": "عربة التسوق",
-  "CHECKOUT": "الدفع"
+  "CHECKOUT": "الدفع",
+  "VIEW_CART": "مشاهدة العربة",
+  "TOTAL": "الاجمالي",
+  "SELECT_OPTIONS": "حدد اخياراتاك",
+  "Add_To_Cart": "اضف الي السلة",
+  "newArrival": "وصل حديِثا",
+  "outOfStock": "غير متوفر ",
+  "OFF": "خصم",
+  "Color": "اللون",
+  "Sale": "خصم",
+  "until": "حتى لا تحتاج إلى البحث الصعب"
 }

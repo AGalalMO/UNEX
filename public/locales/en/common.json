@@ -1,5 +1,6 @@
 {
   "HOME": "Home",
+  "NEW_TRENDS": "New Trends",
   "SHOP": "Shop",
   "PRODUCTS": "Products",
   "CONTACT": "Contact us",
@@ -26,5 +27,15 @@
   "TERMS_AND_CONDITIONS": "Terms and conditions",
   "PRIVACY_POLICY": "Privacy Policy",
   "SHOPPING_CART": "Shopping Cart",
-  "CHECKOUT": "Checkout"
+  "CHECKOUT": "Checkout",
+  "VIEW_CART": "View Cart",
+  "TOTAL": "Total",
+  "SELECT_OPTIONS": "Select Options",
+  "Add_To_Cart": "Add To Cart",
+  "newArrival": "New Arrival",
+  "outOfStock": "Out Of Stock",
+  "OFF": "OFF",
+  "Color": "Color",
+  "Sale": "Sale",
+  "until":"Until it doesn't need to difficult Search"
 }
