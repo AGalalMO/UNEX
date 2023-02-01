@@ -14,7 +14,6 @@ function Header(props) {
   const router = useRouter();
   const [containerClass, setContainerClass] = useState("container");
   const dispatch = useDispatch();
-
   function openMobileMenu() {
     document.querySelector("body").classList.add("mmenu-active");
   }
