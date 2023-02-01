@@ -117,7 +117,7 @@ function GalleryDefault(props) {
                   0 === index ? "active" : ""
                 }`}
                 key={product.id + "-" + index}
-                onClick={(e) => changeBgImage(e, `${item}`, index)}>
+                onClick={(e) => changeBgImage(e, `${item?.url}`, index)}>
                 <div className='img-wrapper h-100'>
                   <img src={product?.images[index].url} alt='product back' />
                 </div>
@@ -129,12 +129,12 @@ function GalleryDefault(props) {
 
       {isOpen ? (
         <LightBox
-          mainSrc={product?.images?.[photoIndex]}
-          nextSrc={product?.images?.[(photoIndex + 1) % product.images.length]}
+          mainSrc={product?.images?.[photoIndex]?.url}
+          nextSrc={product?.images?.[(photoIndex + 1) % product.images.length]?.url}
           prevSrc={
             product?.images?.[
               (photoIndex + product.images.length - 1) % product.images.length
-            ]
+            ]?.url
           }
           onCloseRequest={closeLightBox}
           onMovePrevRequest={moveNextPhoto}

@@ -6,11 +6,11 @@ import Pagination from "~/src/components/features/pagination";
 import axiosInstance from "~/src/utils/axios/axiosInstance";
 import { APIS } from "~/src/utils/ServiceUrls";
 import { BreadCrumb } from "~/src/components/partials/shop/list/components/BreadCrumb";
-import SideBar from "~/src/components/partials/shop/list/components/SiderBar";
 import { ToolBox } from "~/src/components/partials/shop/list/components/ToolBox";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Layout from "~/src/components/layout";
 import { useTranslation } from "next-i18next";
+import SideBar from "~/src/components/partials/shop/sidebar/SideBar";
 
 function ShopGrid ({ products, categories }) {
   const router = useRouter();
