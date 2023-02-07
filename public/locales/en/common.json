@@ -37,5 +37,7 @@
   "OFF": "OFF",
   "Color": "Color",
   "Sale": "Sale",
-  "until":"Until it doesn't need to difficult Search"
+  "until": "Until it doesn't need to difficult Search",
+  "SIGN_IN": "Sign In",
+  "SIGN_UP": "Register"
 }

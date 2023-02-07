@@ -34,7 +34,6 @@ export const useAuthForms = () => {
       name: "",
       phoneNumber: "",
       address: "",
-      city: "",
     },
     validationSchema: yup.object({
       email: yup
@@ -62,7 +61,6 @@ export const useAuthForms = () => {
         .min(11, "phoneNumber should be of minimum 11 characters length")
         .max(11, "phoneNumber should be of maximum 11 characters length")
         .required("phoneNumber is required"),
-      city: yup.string("Select your City").required("City is required"),
     }),
     onSubmit: async (values) => {
       try {

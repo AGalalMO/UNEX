@@ -46,13 +46,18 @@ function MainMenu() {
             <div className='row no-gutters'>
               <div className='col-md-6'>
                 <div className='menu-col'>
-                  {/* className={path.indexOf("product/default") > -1 ? 'active' : ''} */}
                   <ul>
                     {categories.map((item) => {
                       return (
-                        <li key={item?.id}>
-                          <ALink href='/shop/category'>{item?.name}</ALink>
-                        </li>
+                        <>
+                          {item?.subcategories?.map((subCat) => (
+                            <li key={item?.id}>
+                              <ALink href='/shop/category'>
+                                {subCat?.name}
+                              </ALink>
+                            </li>
+                          ))}
+                        </>
                       );
                     })}{" "}
                   </ul>
@@ -80,9 +85,9 @@ function MainMenu() {
           </div>
         </li>
 
-        <li className={path.indexOf("About/") > -1 ? "active" : ""}>
+        {/* <li className={path.indexOf("About/") > -1 ? "active" : ""}>
           <ALink href='/about'>{t("ABOUT", { ns: "common" })}</ALink>
-        </li>
+        </li> */}
         <li className={path.indexOf("About/") > -1 ? "active" : ""}>
           <ALink href='/contact'>{t("CONTACT", { ns: "common" })}</ALink>
         </li>

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import ProductNine from "~/src/components/features/products/product-nine";
 import ProductEleven from "~/src/components/features/products/product-eleven";
 
-function ShopListOne(props) {
+function ShopListOne (props) {
   const { loading, products = [], perPage } = props;
   const router = useRouter();
   const [fakeArray, setFakeArray] = useState([]);

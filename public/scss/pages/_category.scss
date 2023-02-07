@@ -257,6 +257,19 @@
  		margin-left: auto;
  	}
 }
+// html[dir="rtl"] {
+// 	.titlertl a{
+// 	&:after{
+// 		inset-inline-end: 90% !important;
+// 	}
+// }
+// }
+
+// .titlertl a{
+// 	&:after{
+// 		inset-inline-end: 10% !important;
+// 	}
+// }
 
 .widget-collapsible {
 	.widget-title {
@@ -265,7 +278,7 @@
 			display: block;
 			color: inherit;
 			text-decoration: none;
-			padding-right: 3rem;
+			padding-inline-end: 3rem;
 	
 			&:after {
 				color: $dark-text;
@@ -276,7 +289,7 @@
 				line-height: 1;
 				position: absolute;
 				top: 50%;
-				right: 1.6rem;
+				inset-inline-end: 1.6rem;
 				margin-top: -.7rem;
 			}
 
@@ -302,6 +315,7 @@
 	}
 }
 
+
 .filter-item {
 	position: relative;
 	margin-bottom: .3rem;
@@ -317,7 +331,7 @@
 
 .filter-items-count {
 	.filter-item {
-		padding-right: 4rem;
+		padding-inline-end: 4rem;
 	}
 
 	.item-count {

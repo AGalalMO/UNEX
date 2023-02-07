@@ -5,10 +5,14 @@ import ALink from "~/src/components/features/alink";
 import OwlCarousel from "~/src/components/features/owl-carousel";
 import { useTranslation } from "next-i18next";
 
-import { fadeInLeftShorter, fadeInRightShorter, instagramSlider } from "~/src/utils/shared/data";
+import {
+  fadeInLeftShorter,
+  fadeInRightShorter,
+  instagramSlider,
+} from "~/src/utils/shared/data";
 import ImageBanner from "./components/ImageSlider";
 
-function HomeScreen() {
+function HomeScreen({banners}) {
   const loading = false;
   const { t } = useTranslation("common");
   return (
@@ -16,7 +20,7 @@ function HomeScreen() {
       className={`main home-page skeleton-body skel-shop-products ${
         loading ? "" : "loaded"
       }`}>
-      <ImageBanner />
+      <ImageBanner banners={banners} />
 
       <div className='container banners'>
         <div className='row'>
@@ -139,9 +143,7 @@ function HomeScreen() {
             <h2 className='title'>
               {t("INSTAGRAM_INSPIRE", { ns: "common" })}
             </h2>
-            <p className='title-desc'>
-              {t("until", { ns: "common" })}
-            </p>
+            <p className='title-desc'>{t("until", { ns: "common" })}</p>
           </div>
 
           <OwlCarousel adClass='owl-simple mb-3' options={instagramSlider}>

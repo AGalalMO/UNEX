@@ -12,14 +12,16 @@ import Layout from "~/src/components/layout";
 import { useTranslation } from "next-i18next";
 import SideBar from "~/src/components/partials/shop/sidebar/SideBar";
 
-function ShopGrid ({ products, categories }) {
+function ShopGrid({ products, categories }) {
   const router = useRouter();
   const { t } = useTranslation(["shop", "common"]);
   const type = router.query.type;
   const query = router.query;
   const [toggle, setToggle] = useState(false);
   const totalCount = products?.length;
-
+  const [filtered, setFiltered] = useState(products);
+  const [colors, setColors] = useState([]);
+ 
   useEffect(() => {
     window.addEventListener("resize", resizeHandle);
     resizeHandle();
@@ -27,17 +29,29 @@ function ShopGrid ({ products, categories }) {
       window.removeEventListener("resize", resizeHandle);
     };
   }, []);
+  // useEffect(() => {
+  //   getAllColors();
+  // }, [products]);
+  // useEffect(() => {
+  //   getAllColors();
+  // }, []);
 
   function resizeHandle() {
     if (document.querySelector("body").offsetWidth < 992) setToggle(true);
     else setToggle(false);
   }
+  const onChange = async (filters) => {
+    const response = await axiosInstance.get(APIS.PRODUCTS.filter, {
+      params: filters,
+    });
+    setFiltered(response.data)
+  };
 
   return (
     <Layout>
       <main className='main shop'>
         <PageHeader title={"UNEX"} subTitle={t("SHOP")} />
-        <BreadCrumb query={query} pageTitle={''} />
+        <BreadCrumb query={query} pageTitle={""} />
         <div className='page-content'>
           <div className='container'>
             <div className='row skeleton-body'>
@@ -45,7 +59,7 @@ function ShopGrid ({ products, categories }) {
                 <ToolBox type={type} />
 
                 <ShopListOne
-                  products={products}
+                  products={filtered}
                   perPage={10}
                   loading={false}></ShopListOne>
 
@@ -56,7 +70,12 @@ function ShopGrid ({ products, categories }) {
                 )}
               </div>
 
-              <SideBar categories={categories} toggle={toggle} />
+              <SideBar
+                onChange={onChange}
+                categories={categories}
+                toggle={toggle}
+                colors={colors}
+              />
             </div>
           </div>
         </div>

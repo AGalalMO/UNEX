@@ -29,11 +29,12 @@ export const getCart = createAsyncThunk(
   }
 );
 
+
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    setCart(state, action) {
+    setCart (state, action) {
       state.cartList = action.payload;
     },
   },

@@ -11,21 +11,19 @@ import { APIS } from "~/src/utils/ServiceUrls";
 import { getCart } from "~/src/store/cart";
 import axiosInstance from "~/src/utils/axios/axiosInstance";
 import { useTranslation } from "next-i18next";
+import { useRouter } from "next/router";
 
 function Cart(props) {
   const dispatch = useDispatch();
   const [cartList, setCartList] = useState([]);
-  const [shippingCost, setShippingCost] = useState(0);
   const cartItems = useSelector((state) => state.cart.cartList);
   const { t } = useTranslation(["cart", "common"]);
-
+  const router=useRouter()
   useEffect(() => {
     setCartList(cartItems);
   }, [cartItems]);
 
-  function onChangeShipping(value) {
-    setShippingCost(value);
-  }
+
 
   const getCartTotalPrice = (cart) => {
     let total = 0;
@@ -66,6 +64,7 @@ function Cart(props) {
       },
     });
     dispatch(getCart());
+    router.replace('/')
   };
 
   return (
@@ -223,79 +222,14 @@ function Cart(props) {
                             <td>{t("TOTAL")}</td>
                             <td>EGP {getCartTotalPrice(cartList)}</td>
                           </tr>
-                          <tr className="summary-shipping">
-                            <td>{t("SHIPPING")}:</td>
-                            <td>&nbsp;</td>
-                          </tr>
+                        
 
-                          <tr className="summary-shipping-row">
-                            <td>
-                              <div className="custom-control custom-radio">
-                                <input
-                                  type="radio"
-                                  id="free-shipping"
-                                  name="shipping"
-                                  className="custom-control-input"
-                                  onChange={(e) => onChangeShipping(0)}
-                                  defaultChecked={true}
-                                />
-                                <label
-                                  className="custom-control-label"
-                                  htmlFor="free-shipping"
-                                >
-                                  Free Shipping
-                                </label>
-                              </div>
-                            </td>
-                            <td>EGP 0.00</td>
-                          </tr>
-
-                          <tr className="summary-shipping-row">
-                            <td>
-                              <div className="custom-control custom-radio">
-                                <input
-                                  type="radio"
-                                  id="standard-shipping"
-                                  name="shipping"
-                                  className="custom-control-input"
-                                  onChange={(e) => onChangeShipping(10)}
-                                />
-                                <label
-                                  className="custom-control-label"
-                                  htmlFor="standard-shipping"
-                                >
-                                  Standard:
-                                </label>
-                              </div>
-                            </td>
-                            <td>EGP 10.00</td>
-                          </tr>
-
-                          <tr className="summary-shipping-row">
-                            <td>
-                              <div className="custom-control custom-radio">
-                                <input
-                                  type="radio"
-                                  id="express-shipping"
-                                  name="shipping"
-                                  className="custom-control-input"
-                                  onChange={(e) => onChangeShipping(20)}
-                                />
-                                <label
-                                  className="custom-control-label"
-                                  htmlFor="express-shipping"
-                                >
-                                  Express:
-                                </label>
-                              </div>
-                            </td>
-                            <td>EGP 20.00</td>
-                          </tr>
+                        
 
                           <tr className="summary-total">
                             <td>{t("TOTAL")}</td>
                             <td>
-                              {getCartTotalPrice(cartList) + shippingCost}
+                              {getCartTotalPrice(cartList) }
                             </td>
                           </tr>
                         </tbody>

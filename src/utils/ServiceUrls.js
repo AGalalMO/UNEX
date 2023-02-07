@@ -7,6 +7,7 @@ export const APIS = {
   PRODUCTS: {
     LIST: `${baseUrl}product/getall`,
     GET: (id) => `${baseUrl}product/getbyid?id=${id}`,
+    filter: `${baseUrl}product/filter`,
   },
   CATEGORIES: {
     LIST: `${baseUrl}category/getall`,

@@ -36,7 +36,6 @@ function SingleProduct({ product }) {
               </div>
             </div>
 
-            {/* <RelatedProductsOne products={[]} loading={loading} /> */}
           </div>
         </div>
       </div>

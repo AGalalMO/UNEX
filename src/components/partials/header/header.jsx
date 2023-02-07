@@ -14,20 +14,7 @@ function Header(props) {
   const router = useRouter();
   const [containerClass, setContainerClass] = useState("container");
   const dispatch = useDispatch();
-  const [cartList, setCartList] = useState(
-    useSelector((state) => state.cart.cartList)
-  );
- const removeFromCart = async (item) => {
-   try {
-     const response = await axiosInstance.post(APIS.CART.DELETE, null, {
-       params: {
-         id: item?.cartId,
-       },
-     });
-     dispatch(getCart());
-     setCartList(useSelector((state) => state.cart.cartList));
-   } catch (error) {}
- };
+
   function openMobileMenu() {
     document.querySelector("body").classList.add("mmenu-active");
   }
@@ -41,7 +28,7 @@ function Header(props) {
   useEffect(() => {
     dispatch(getCart());
   }, []);
-
+console.log("routr",router?.lo)
   return (
     <header className={`header header-11 ${props.adClass}`}>
       <StickyHeader>
@@ -70,10 +57,7 @@ function Header(props) {
             <div className='header-right'>
               <WishlistMenu />
 
-              <CartMenu
-                removeFromCart={(item) => removeFromCart(item)}
-                cartList={cartList}
-              />
+              <CartMenu />
               <Typography
                 sx={{
                   marginLeft: "2.3rem",
@@ -82,8 +66,21 @@ function Header(props) {
                   cursor: "pointer",
                 }}
                 onClick={() => {
-                  router.replace(router?.locale == "ar" ? "/en" : "/ar");
-                }}>
+                  const newlocale = router?.locale == 'ar' ? 'en' : 'ar'
+                  console.log("newLocale",newlocale)
+                  console.log("newLocale router.asPath", router.asPath);
+                  router.push(
+                    {
+                      route: router.pathname,
+                      query: router.query,
+                    },
+                    router.asPath,
+                    { locale:newlocale }
+                  );
+            }}
+                
+                   
+                >
                 {router.locale == "en" ? "العربية" : "EN"}
               </Typography>
             </div>

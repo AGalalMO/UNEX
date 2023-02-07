@@ -17,5 +17,6 @@
   "QUANTITY": "الكمية",
   "SIZE_GUIDE": "دليل المقاسات",
   "PRODUCT_DESC": "وصف المنتج",
-  "ADD_TO_CART": "أضف إلى السلة"
+  "ADD_TO_CART": "أضف إلى السلة",
+  "selectSize":"اختر المقاس"
 }

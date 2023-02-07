@@ -17,5 +17,7 @@
   "QUANTITY": "Qty",
   "SIZE_GUIDE": "size guide",
   "PRODUCT_DESC": "Product Description",
-  "ADD_TO_CART": "Add To Cart"
+  "ADD_TO_CART": "Add To Cart",
+    "selectSize":"Select A Size"
+
 }

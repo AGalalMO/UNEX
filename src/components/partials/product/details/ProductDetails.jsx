@@ -10,6 +10,7 @@ import axiosInstance from "~/src/utils/axios/axiosInstance";
 import { APIS } from "~/src/utils/ServiceUrls";
 import { getCart } from "~/src/store/cart";
 import { useTranslation } from "next-i18next";
+import useAuth from "~/src/hooks/useAuth";
 
 function DetailOne(props) {
   const { t } = useTranslation(["shop", "common"]);
@@ -17,14 +18,16 @@ function DetailOne(props) {
   const { id } = router.query;
   const ref = useRef(null);
   const { product } = props;
-  const [qty, setQty] = useState(1);
-  const [size, setSize] = useState(1);
+  const [qty, setQty] = useState(0);
+  const [size, setSize] = useState("");
   const [color, setColor] = useState(1);
   const [selectedInfo, setSelectedInfo] = useState(product?.info?.[0]);
   const [selectedSizeCount, setSelectedSizeCount] = useState(
     product?.info?.[0]?.countBySize?.[0]
   );
+  const { isAuthenticated } = useAuth();
   const dispatch = useDispatch();
+  console.log("props", product);
   useEffect(() => {
     window.addEventListener("scroll", scrollHandler, {
       passive: true,
@@ -71,19 +74,24 @@ function DetailOne(props) {
   }
 
   async function onCartClick(e, index = 0) {
-    if (qty) {
+    if (!isAuthenticated) router.push("/auth/signin/");
+
+    if (qty && size !== "") {
       e.preventDefault();
       if (e.currentTarget.classList.contains("btn-disabled")) return;
-      console.log({ product });
+      else {
+        console.log({ product });
 
-      await axiosInstance.post(APIS.CART.ADD, null, {
-        params: {
-          itemId: selectedSizeCount.itemId,
-          token: localStorage.getItem("accessToken"),
-          count: qty,
-        },
-      });
-      dispatch(getCart());
+        await axiosInstance.post(APIS.CART.ADD, null, {
+          params: {
+            itemId: selectedSizeCount.itemId,
+            token: localStorage.getItem("accessToken"),
+            count: qty,
+          },
+        });
+        dispatch(getCart());
+        ///router.reload();
+      }
     }
   }
 
@@ -157,7 +165,7 @@ function DetailOne(props) {
                     onChange={(e) => {
                       selectSize(e.target.value);
                     }}>
-                    <option value=''>Select a size</option>
+                    <option value=''>{t("selectSize")}</option>
                     {selectedInfo.countBySize?.map((item, index) => (
                       <option value={item.size} key={index}>
                         {item.size}
@@ -190,7 +198,7 @@ function DetailOne(props) {
             )}
           </div>
 
-          {Boolean(selectedSizeCount) && Boolean(qty) && (
+          {size !== "" && qty != 0 && (
             <div className='product-details-action'>
               <a
                 href='#'
@@ -222,46 +230,11 @@ function DetailOne(props) {
               <p style={{ fontWeight: "500", display: "flex" }}>
                 {t("PRODUCT_DESC")}
               </p>
-              <span>
-                We deliver to over 100 countries around the world. For full
-                details of the delivery options we offer, please view our
-                Delivery information We hope you’ll love every purchase, but if
-                you ever need to return an item you can do so within a month of
-                receipt. For full details of how to make a return, please view
-                our Returns information We deliver to over 100 countries around
-                the world. For full details of the delivery options we offer,
-                please view our Delivery information We hope you’ll love every
-                purchase, but if you ever need to return an item you can do so
-                within a month of receipt. For full details of how to make a
-                return, please view our Returns information We deliver to over
-                100 countries around the world. For full details of the delivery
-                options we offer, please view our Delivery information We hope
-                you’ll love every purchase, but if you ever need to return an
-                item you can do so within a month of receipt. For full details
-                of how to make a return, please view our Returns information
-              </span>
+              <span>{product?.description} </span>
             </div>
           </div>
         </>
       )}
-
-      {/* <div className="sticky-bar d-none">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-6">
-                            <figure className="product-media">
-                                <ALink href={`/product/default/${product?.slug}`}>
-                                    <img src={product?.images?.[0]} alt="product" width={250} height={250} />
-                                </ALink>
-                            </figure>
-                            <h3 className="product-title">
-                                <ALink href={`/product/default/${product?.slug}`}>{product?.name}</ALink>
-                            </h3>
-                        </div>
-                      
-                    </div >
-                </div >
-            </div > */}
     </div>
   );
 }
