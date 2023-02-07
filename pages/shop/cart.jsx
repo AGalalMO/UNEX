@@ -24,9 +24,7 @@ function Cart(props) {
     setCartList(cartItems);
   }, [cartItems]);
 
-  function onChangeShipping(value) {
-    setShippingCost(value);
-  }
+
 
   const getCartTotalPrice = (cart) => {
     let total = 0;

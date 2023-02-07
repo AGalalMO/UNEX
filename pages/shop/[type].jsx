@@ -21,7 +21,6 @@ function ShopGrid({ products, categories }) {
   const totalCount = products?.length;
   const [filtered, setFiltered] = useState(products);
   const [colors, setColors] = useState([]);
-
   useEffect(() => {
     window.addEventListener("resize", resizeHandle);
     resizeHandle();
@@ -29,6 +28,12 @@ function ShopGrid({ products, categories }) {
       window.removeEventListener("resize", resizeHandle);
     };
   }, []);
+  // useEffect(() => {
+  //   getAllColors();
+  // }, [products]);
+  // useEffect(() => {
+  //   getAllColors();
+  // }, []);
 
   function resizeHandle() {
     if (document.querySelector("body").offsetWidth < 992) setToggle(true);
