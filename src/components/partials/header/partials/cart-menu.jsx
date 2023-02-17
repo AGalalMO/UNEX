@@ -13,6 +13,7 @@ function CartMenu (props) {
   
   const dispatch = useDispatch();
   const cartList = useSelector((state) => state.cart.cartList)
+  
   const removeFromCart = async (item) =>
   {
      try {
@@ -47,7 +48,13 @@ function CartMenu (props) {
     return total;
   };
   const { isAuthenticated } = useAuth();
-
+  const goToProduct = (id) => {
+     router.push(
+      `/product/${id}`,
+      null,
+       { locale: router.locale }
+     );
+  }
   return (
     <>
       {isAuthenticated && (
@@ -85,7 +92,10 @@ function CartMenu (props) {
                         style={{ width: "100%" }}
                         className='product-cart-details'>
                         <h4 className='product-title'>
-                          <ALink href={`#`}>{item.name}</ALink>
+                          <span style={{
+                            cursor: 'pointer', '&&:hover': {
+                            color:'red'
+                          }}} onClick={()=>goToProduct(item?.productId)}>{item.name}</span>
                         </h4>
                         <Stack
                           direction={"row"}

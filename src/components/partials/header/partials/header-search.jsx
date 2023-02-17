@@ -100,11 +100,11 @@ function HeaderSearch () {
     function onSubmitSearchForm (e) {
         e.preventDefault();
         router.push({
-            pathname: '/shop/sidebar/list',
-            query: {
-                searchTerm: searchTerm,
-                category: cat
-            }
+          pathname: "/shop/3cols",
+          query: {
+            searchTerm: searchTerm,
+            category: cat,
+          },
         });
     }
 

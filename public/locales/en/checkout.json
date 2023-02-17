@@ -21,5 +21,6 @@
   "QUANTITY": "Quantity",
   "SHIPPING": "Shipping",
   "NO_PRODUCTS": "No products in Cart",
-  "ADD_TO_CART": "Add To Cart"
+  "ADD_TO_CART": "Add To Cart",
+  "CHECKOUT": "Checkout"
 }

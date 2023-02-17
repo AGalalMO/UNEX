@@ -1,13 +1,11 @@
-import GoogleMapReact from "google-map-react";
 import ALink from "~/src/components/features/alink";
 import PageHeader from "~/src/components/features/page-header";
 import { useTranslation } from "next-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Layout from "~/src/components/layout";
-import { BreadCrumb } from "~/src/components/partials/shop/list/components/BreadCrumb";
 import { useRouter } from "next/router";
-
-
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+import CallOutlinedIcon from "@mui/icons-material/CallOutlined";
 function ContactUs() {
   const { t } = useTranslation(["contact", "common"]);
   const { locale, replace } = useRouter();
@@ -48,10 +46,26 @@ function ContactUs() {
                   <div className='contact-box text-center'>
                     <h3>{t("START_CONVESATION")}</h3>
 
-                    <div>
+                    <div
+                      style={{
+                        gap: "10px",
+                        alignItems: "center",
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "center",
+                      }}>
+                      <EmailOutlinedIcon />
                       <a href='mailto:#'>unex-city@gmail.com</a>
                     </div>
-                    <div>
+                    <div
+                      style={{
+                        gap: "10px",
+                        alignItems: "center",
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "center",
+                      }}>
+                      <CallOutlinedIcon />
                       <a href='tel:#'>+2 0 100 028 8168</a>
                     </div>
                   </div>
@@ -125,8 +139,8 @@ function ContactUs() {
                     <div className='text-center'>
                       <button
                         onClick={() => {
-                          console.log('hello')
-                          replace('/')
+                          console.log("hello");
+                          replace("/");
                         }}
                         className='btn btn-outline-primary-2 btn-minwidth-sm'>
                         <span>{t("SUBMIT")}</span>

@@ -36,7 +36,7 @@ function DashBoard () {
                             <ALink href="/">Home</ALink>
                         </li>
                         <li className="breadcrumb-item">
-                            <ALink href="/shop/sidebar/list">Shop</ALink>
+                            <ALink href="/shop/3cols">Shop</ALink>
                         </li>
                         <li className="breadcrumb-item active">My Account</li>
                     </ol>
@@ -87,12 +87,12 @@ function DashBoard () {
 
                                             <TabPanel>
                                                 <p>No order has been made yet.</p>
-                                                <ALink href="/shop/sidebar/list" className="btn btn-outline-primary-2"><span>GO SHOP</span><i className="icon-long-arrow-right"></i></ALink>
+                                                <ALink href="/shop/3cols" className="btn btn-outline-primary-2"><span>GO SHOP</span><i className="icon-long-arrow-right"></i></ALink>
                                             </TabPanel>
 
                                             <TabPanel>
                                                 <p>No downloads available yet.</p>
-                                                <ALink href="/shop/sidebar/list" className="btn btn-outline-primary-2"><span>GO SHOP</span><i className="icon-long-arrow-right"></i></ALink>
+                                                <ALink href="/shop/3cols" className="btn btn-outline-primary-2"><span>GO SHOP</span><i className="icon-long-arrow-right"></i></ALink>
                                             </TabPanel>
 
                                             <TabPanel>

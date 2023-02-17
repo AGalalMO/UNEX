@@ -35,6 +35,7 @@ function Qty ( props ) {
             <div className="input-group input-spinner">
                 <div className="input-group-prepend">
                     <button
+                        
                         style={ { minWidth: '26px' } }
                         className="btn btn-decrement btn-spinner"
                         onClick={ decrement }

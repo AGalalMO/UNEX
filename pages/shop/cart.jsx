@@ -18,12 +18,11 @@ function Cart(props) {
   const [cartList, setCartList] = useState([]);
   const cartItems = useSelector((state) => state.cart.cartList);
   const { t } = useTranslation(["cart", "common"]);
-  const router=useRouter()
+
+  const router = useRouter();
   useEffect(() => {
     setCartList(cartItems);
   }, [cartItems]);
-
-
 
   const getCartTotalPrice = (cart) => {
     let total = 0;
@@ -64,41 +63,43 @@ function Cart(props) {
       },
     });
     dispatch(getCart());
-    router.replace('/')
+    router.replace("/");
   };
 
   return (
     <Layout>
-      <div className="main">
-        <PageHeader title="Shopping Cart" subTitle="Shop" />
-        <nav className="breadcrumb-nav">
-          <div className="container">
-            <ol className="breadcrumb">
-              <li className="breadcrumb-item">
-                <ALink href="/">{t("HOME", { ns: "common" })}</ALink>
+      <div className='main'>
+        <PageHeader
+          title={t("SHOPPING_CART", { ns: "common" })}
+          subTitle={t("SHOP", { ns: "common" })}
+        />
+        <nav className='breadcrumb-nav'>
+          <div className='container'>
+            <ol className='breadcrumb'>
+              <li className='breadcrumb-item'>
+                <ALink href='/'>{t("HOME", { ns: "common" })}</ALink>
               </li>
-              <li className="breadcrumb-item">
-                <ALink href="/shop/sidebar/list">
-                  {t("SHOP", { ns: "common" })}
-                </ALink>
+              <li className='breadcrumb-item'>
+                <ALink href='/shop/3cols'>{t("SHOP", { ns: "common" })}</ALink>
               </li>
-              <li className="breadcrumb-item active">
+              <li className='breadcrumb-item active'>
                 {t("SHOPPING_CART", { ns: "common" })}
               </li>
             </ol>
           </div>
         </nav>
 
-        <div className="page-content pb-5">
-          <div className="cart">
-            <div className="container">
+        <div className='page-content pb-5'>
+          <div className='cart'>
+            <div className='container'>
               {true ? (
-                <div className="row">
-                  <div className="col-lg-9">
-                    <table className="table table-cart table-mobile">
+                <div className='row'>
+                  <div className='col-lg-9'>
+                    <table className='table table-cart table-mobile'>
                       <thead>
                         <tr>
                           <th style={{ textAlign: "start" }}>{t("PRODUCT")}</th>
+                          <th style={{ textAlign: "start" }}>{t("Color")}</th>
                           <th style={{ textAlign: "start" }}>{t("SIZE")}</th>
                           <th style={{ textAlign: "start" }}>{t("PRICE")}</th>
                           <th style={{ textAlign: "start" }}>
@@ -118,13 +119,11 @@ function Cart(props) {
                                   textAlign: "start",
                                   marginInlineEnd: "5px",
                                 }}
-                                className="product-col"
-                              >
+                                className='product-col'>
                                 <div
-                                  className="product"
-                                  style={{ paddingInlineStart: "0px" }}
-                                >
-                                  <h4 className="product-title">{item.name}</h4>
+                                  className='product'
+                                  style={{ paddingInlineStart: "0px" }}>
+                                  <h4 className='product-title'>{item.name}</h4>
                                 </div>
                               </td>
                               <td
@@ -132,18 +131,31 @@ function Cart(props) {
                                   textAlign: "start",
                                   marginInlineEnd: "5px",
                                 }}
-                                className="size-col"
-                              >
-                                {item.size}
+                                className='size-col'>
+                                <div
+                                  style={{
+                                    borderRadius: "50%",
+                                    width: "25px",
+                                    height: "25px",
+                                    background: item.color,
+                                  }}></div>
                               </td>
                               <td
                                 style={{
                                   textAlign: "start",
                                   marginInlineEnd: "5px",
                                 }}
-                                className="price-col"
-                              >
-                                EGP{" "}
+                                className='size-col'>
+                                {item.size}
+                              </td>
+
+                              <td
+                                style={{
+                                  textAlign: "start",
+                                  marginInlineEnd: "5px",
+                                }}
+                                className='price-col'>
+                                {router?.locale == "ar" ? " جم " : " EGP "}
                                 {item.discountedPrice
                                   ? item.discountedPrice.toLocaleString(
                                       undefined,
@@ -163,15 +175,13 @@ function Cart(props) {
                                   textAlign: "start",
                                   marginInlineEnd: "5px",
                                 }}
-                                className="quantity-col"
-                              >
+                                className='quantity-col'>
                                 <Qty
                                   value={item.count}
                                   changeQty={(current) =>
                                     changeQty(current, item.cartId)
                                   }
-                                  adClass="cart-product-quantity"
-                                ></Qty>
+                                  adClass='cart-product-quantity'></Qty>
                               </td>
 
                               <td
@@ -179,8 +189,7 @@ function Cart(props) {
                                   textAlign: "start",
                                   marginInlineEnd: "5px",
                                 }}
-                                className="total-col"
-                              >
+                                className='total-col'>
                                 {(
                                   item.discountedPrice * item.count
                                 ).toLocaleString(undefined, {
@@ -189,12 +198,11 @@ function Cart(props) {
                                 })}
                               </td>
 
-                              <td className="remove-col">
+                              <td className='remove-col'>
                                 <button
-                                  className="btn-remove"
-                                  onClick={() => removeFromCart(item.cartId)}
-                                >
-                                  <i className="icon-close"></i>
+                                  className='btn-remove'
+                                  onClick={() => removeFromCart(item.cartId)}>
+                                  <i className='icon-close'></i>
                                 </button>
                               </td>
                             </tr>
@@ -202,7 +210,7 @@ function Cart(props) {
                         ) : (
                           <tr>
                             <td>
-                              <p className="pl-2 pt-1 pb-1">
+                              <p className='pl-2 pt-1 pb-1'>
                                 {" "}
                                 {t("NO_PRODUCTS")}{" "}
                               </p>
@@ -212,57 +220,40 @@ function Cart(props) {
                       </tbody>
                     </table>
                   </div>
-                  <aside className="col-lg-3">
-                    <div className="summary summary-cart">
-                      <h3 className="summary-title">{t("CART_TOTAL")}</h3>
+                  <aside className='col-lg-3'>
+                    <div className='summary summary-cart'>
+                      <h3 className='summary-title'>{t("CART_TOTAL")}</h3>
 
-                      <table className="table table-summary">
+                      <table className='table table-summary'>
                         <tbody>
-                          <tr className="summary-subtotal">
+                          <tr className='summary-total'>
                             <td>{t("TOTAL")}</td>
-                            <td>EGP {getCartTotalPrice(cartList)}</td>
-                          </tr>
-                        
+                            <td style={{ paddingInlineStart: "10px" }}>
+                              {router?.locale == "en" && " EGP "}
 
-                        
-
-                          <tr className="summary-total">
-                            <td>{t("TOTAL")}</td>
-                            <td>
-                              {getCartTotalPrice(cartList) }
+                              {getCartTotalPrice(cartList)}
+                              {router?.locale == "ar" && " جم "}
                             </td>
                           </tr>
                         </tbody>
                       </table>
 
                       <ALink
-                        className="btn btn-outline-primary-2 btn-order btn-block"
-                        href="/shop/checkout"
-                      >
+                        className='btn btn-outline-primary-2 btn-order btn-block'
+                        href='/shop/checkout'>
                         {t("PROCEED_TO")}
                       </ALink>
                     </div>
                   </aside>
                 </div>
               ) : (
-                <div className="row">
-                  <div className="col-12">
-                    <div className="cart-empty-page text-center">
+                <div className='row'>
+                  <div className='col-12'>
+                    <div className='cart-empty-page text-center'>
                       <i
-                        className="cart-empty icon-shopping-cart"
-                        style={{ lineHeight: 1, fontSize: "15rem" }}
-                      ></i>
-                      <p className="px-3 py-2 cart-empty mb-3">
-                        No products added to the cart
-                      </p>
-                      <p className="return-to-shop mb-0">
-                        <ALink
-                          href="/shop/sidebar/list"
-                          className="btn btn-primary"
-                        >
-                          RETURN TO SHOP
-                        </ALink>
-                      </p>
+                        className='cart-empty icon-shopping-cart'
+                        style={{ lineHeight: 1, fontSize: "15rem" }}></i>
+                      <p className='px-3 py-2 cart-empty mb-3'>{t("empty")}</p>
                     </div>
                   </div>
                 </div>

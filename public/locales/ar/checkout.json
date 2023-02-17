@@ -22,5 +22,6 @@
   "QUANTITY": "الكمية",
   "SHIPPING": "الشحن",
   "NO_PRODUCTS": "لا توجد منتجات",
-  "ADD_TO_CART": "أضف إلى السلة"
+  "ADD_TO_CART": "أضف إلى السلة",
+  "CHECKOUT":"الدفع"
 }

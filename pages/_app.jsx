@@ -64,7 +64,7 @@ const WrappedApp = ({ Component, pageProps }) => {
             href='images/icons/safari-pinned-tab.svg'
             color='#666666'
           />
-          <link rel='shortcut icon' href='images/icons/favicon.ico' />
+          <link rel='shortcut icon' href='images/icons/Logo.png' />
         </Helmet>
 
         <Component {...pageProps} />

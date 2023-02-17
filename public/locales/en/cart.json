@@ -10,6 +10,8 @@
   "SIZE": "Size",
   "PRICE": "Price",
   "QUANTITY": "Quantity",
+  "empty": "  No products added to the cart",
+  "Color":"Color",
   "ADD_TO_CART": "Add to Cart",
   "SHIPPING": "Shipping",
   "NO_PRODUCTS": "No products in Cart"

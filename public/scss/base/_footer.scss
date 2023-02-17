@@ -44,11 +44,12 @@
 		letter-spacing: -.01em;
 		margin-top: 0;
 		margin-bottom: 1.9rem;
+		text-align: center;
 	}
 
 	.widget-list {
 		margin-bottom: 0;
-	
+		text-align: center;
 		li:not(:last-child) {
 			margin-bottom: .4rem;
 		}
@@ -61,6 +62,7 @@
 }
 
 .footer-bottom {
+
 	.container,
 	.container-fluid {
 		position: relative;
@@ -72,20 +74,21 @@
 		padding-bottom: 2.9rem;
 
 		&:before {
-			content:'';
+			content: '';
 			display: block;
 			height: 1px;
 			position: absolute;
-			top:0;
+			top: 0;
 			left: 10px;
 			right: 10px;
 			background-color: #ebebeb;
 		}
 	}
 
-// 1.2) Default Footer Elements
-// 1.2.1) Social Icons
+	// 1.2) Default Footer Elements
+	// 1.2.1) Social Icons
 	.social-icons {
+		gap: '5px';
 		margin-left: auto;
 		margin-right: auto;
 		margin-bottom: 1rem;
@@ -136,8 +139,8 @@
 	}
 }
 
-.col-md-6  .widget-about p,
-.col-lg-6  .widget-about p {
+.col-md-6 .widget-about p,
+.col-lg-6 .widget-about p {
 	max-width: none;
 }
 
@@ -160,6 +163,7 @@
 		color: inherit;
 		font-size: 1.6rem;
 		margin-top: .7rem;
+
 		span {
 			color: #fff;
 			font-weight: 400;
@@ -180,7 +184,7 @@
 		transition: all 0.3s;
 
 		&.form-control::placeholder {
-		color: #999999;
+			color: #999999;
 		}
 	}
 
@@ -229,9 +233,10 @@
 
 	li {
 		position: relative;
-		& + li {
+
+		&+li {
 			margin-left: 2.1rem;
-			
+
 			&:before {
 				content: '';
 				display: inline-block;
@@ -330,6 +335,7 @@
 	}
 
 	.social-icon {
+
 		&:hover,
 		&:focus {
 			color: #fff;
@@ -338,7 +344,7 @@
 
 	.footer-bottom {
 		color: #666666;
-		
+
 		.container:before {
 			background-color: #525455;
 		}
@@ -346,10 +352,11 @@
 
 	&.footer-2 {
 		.widget-about-info {
-			 a:not(:hover) {
-			 	color: #fff;
+			a:not(:hover) {
+				color: #fff;
 			}
 		}
+
 		.widget-about-title {
 			color: $primary-color;
 		}
@@ -372,11 +379,11 @@
 			padding-bottom: 2.3rem;
 
 			&:before {
-				content:'';
+				content: '';
 				display: block;
 				height: 1px;
 				position: absolute;
-				bottom:0;
+				bottom: 0;
 				left: 10px;
 				right: 10px;
 				background-color: #ebebeb;
@@ -387,6 +394,7 @@
 	.icon-box {
 		font-size: 1.4rem;
 	}
+
 	.icon-box-side {
 		margin-left: -2rem;
 	}
@@ -401,10 +409,14 @@
 		font-size: 1.4rem;
 		margin-bottom: .1rem;
 		font-weight: 600;
+		text-align: start;
+		display: flex;
+		flex-direction: '';
 	}
 
 	.icon-box-content {
 		padding-top: .5rem;
+
 		p {
 			letter-spacing: -.01em;
 		}
@@ -424,11 +436,13 @@
 			}
 		}
 	}
-	.footer-middle .container >.row {
+
+	.footer-middle .container>.row {
 		>div:not(:first-child) {
 			padding-left: 6rem;
 		}
 	}
+
 	.footer-bottom .container,
 	.footer-bottom .container-fluid {
 		padding-bottom: 2.1rem;
@@ -442,6 +456,7 @@
 // Responsive
 @include mq('lg') {
 	.footer-2 {
+
 		.footer-bottom .container,
 		.footer-bottom .container-fluid {
 			flex-direction: row;
@@ -458,15 +473,17 @@
 
 @include mq('lg') {
 	.footer-bottom {
+
 		.container,
 		.container-fluid {
 			flex-direction: row;
 		}
-		
+
 		.social-icons {
 			margin-left: auto;
 			margin-right: 0;
 			margin-bottom: 0;
+
 		}
 	}
 
@@ -486,6 +503,7 @@
 	}
 
 	.footer-2 {
+
 		.footer-bottom .container,
 		.footer-bottom .container-fluid {
 			flex-direction: row;

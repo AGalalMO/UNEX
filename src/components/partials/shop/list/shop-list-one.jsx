@@ -19,8 +19,8 @@ function ShopListOne (props) {
   }, [perPage]);
 
   useEffect(() => {
-    if (type === "list" || type === "2cols") setGridClass("col-6");
-    if (type === "3cols") setGridClass("col-6 col-md-4 col-lg-4");
+    if (type === "list-2" || type === "2cols") setGridClass("col-6");
+    if (type === "list") setGridClass("col-6 col-md-4 col-lg-4");
   }, [type]);
 
   return (

@@ -28,7 +28,6 @@ function Header(props) {
   useEffect(() => {
     dispatch(getCart());
   }, []);
-console.log("routr",router?.lo)
   return (
     <header className={`header header-11 ${props.adClass}`}>
       <StickyHeader>

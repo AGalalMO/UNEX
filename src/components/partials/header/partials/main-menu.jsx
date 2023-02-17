@@ -52,7 +52,12 @@ function MainMenu() {
                         <>
                           {item?.subcategories?.map((subCat) => (
                             <li key={item?.id}>
-                              <ALink href='/shop/category'>
+                              <ALink
+                                href={{
+                                  pathname: "/shop/3cols",
+                                  query: {   cat: item?.id },
+                                  locale:router?.locale
+                                }}>
                                 {subCat?.name}
                               </ALink>
                             </li>

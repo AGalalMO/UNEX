@@ -119,7 +119,7 @@ function ProductSix (props) {
                   <React.Fragment key={item.slug + "-" + index}>
                     <ALink
                       href={{
-                        pathname: "/shop/sidebar/list",
+                        pathname: "/shop/3cols",
                         query: { category: item.slug },
                       }}>
                       {item.name}

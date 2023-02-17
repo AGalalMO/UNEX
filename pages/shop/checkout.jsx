@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 
 import Accordion from "~/src/components/features/accordion/accordion";
 import Card from "~/src/components/features/accordion/card";
@@ -17,7 +17,12 @@ import Layout from "~/src/components/layout";
 
 function Checkout(props) {
   const { t } = useTranslation(["checkout", "common"]);
+  const [submitted,setSubmitted]=useState(false)
   const router = useRouter();
+  const [fees, setFees] = useState(50)
+  const[required,setRequired]=useState(false)
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [cities,setCities]=useState()
   const cartlist = useSelector((state) => state.cart.cartList);
   const [userData, setUserData] = useState({
     Address: "",
@@ -27,14 +32,24 @@ function Checkout(props) {
     PhoneNumber: "",
   });
 
-  const getCartTotalPrice = (cart) => {
+  const getCities = async () => {
+    const response = await axiosInstance.get(APIS.UTILS.DELIVERY_CITIES)
+    setCities(response.data)
+  }
+  useEffect(() => {
+    getCities()
+  },[])
+  const getCartTotalPrice = (cart,isSub) => {
     let total = 0;
     for (let i = 0; i < cart.length; i++) {
       if (cart[i].discountedPrice)
         total += cart[i].discountedPrice * cart[i].count;
       else total += cart[i].price * cart[i].count;
     }
-    return total;
+    if(isSub)
+      return total;
+    else
+      return parseInt(total) + parseInt(cities?.[fees]?.deliveryFees??0);
   };
 
   const updateUserData = (event) => {
@@ -43,140 +58,206 @@ function Checkout(props) {
       [event.target.name]: event.target.value,
     }));
   };
+  const goToProduct = (id) => {
+    router.push(`/product/${id}`, null, { locale: router.locale });
+  };
+  const validation = useMemo(() => {
+     if (
+       userData.Address &&
+       userData.City &&
+       userData.Email &&
+       userData.PhoneNumber
+     )
+       return true;
+  
+     else {
+       setRequired(false)
+       return false;
+     }
+  },[userData])
 
-  const placeOrder = async () => {
-    event.preventDefault();
-    await axiosInstance.post(APIS.ORDER.PLACE_ORDER, userData, {
-      params: {
-        token: localStorage.getItem("accessToken"),
-      },
-    });
+
+  const placeOrder = async (e) =>
+  {
+    e.preventDefault();
+    if (!validation)
+    {
+      setRequired(true)
+       return;
+     }
+    
+    setSubmitted(true)
+    await axiosInstance.post(
+      APIS.ORDER.PLACE_ORDER,
+      { ...userData, PostalCode: "12222", City: cities?.[fees]?.city },
+      {
+        params: {
+          token: localStorage.getItem("accessToken"),
+        },
+      }
+    );
     router.push("/");
   };
 
   return (
     <Layout>
-      <div className="main">
-        <PageHeader title="Checkout" subTitle="Shop" />
-        <nav className="breadcrumb-nav">
-          <div className="container">
-            <ol className="breadcrumb">
-              <li className="breadcrumb-item">
-                <ALink href="/">{t("HOME", { ns: "common" })}</ALink>
+      <div className='main'>
+        <PageHeader
+          title={t("CHECKOUT", { ns: "common" })}
+          subTitle={t("SHOP", { ns: "common" })}
+        />
+        <nav className='breadcrumb-nav'>
+          <div className='container'>
+            <ol className='breadcrumb'>
+              <li className='breadcrumb-item'>
+                <ALink href='/'>{t("HOME", { ns: "common" })}</ALink>
               </li>
-              <li className="breadcrumb-item">
-                <ALink href="/shop/sidebar/list">
+              <li className='breadcrumb-item'>
+                <ALink
+                  href={
+                    router.locale == "ar" ? "/ar/shop/3cols" : "/shop/3cols"
+                  }>
                   {t("SHOP", { ns: "common" })}
                 </ALink>
               </li>
-              <li className="breadcrumb-item active">
+              <li className='breadcrumb-item active'>
                 {t("CHECKOUT", { ns: "common" })}
               </li>
             </ol>
           </div>
         </nav>
 
-        <div className="page-content">
-          <div className="checkout">
-            <div className="container">
-              <form action="#">
-                <div className="row">
-                  <div className="col-lg-9">
-                    <h2 className="checkout-title" style={{ display: "flex" }}>
+        <div className='page-content'>
+          <div className='checkout'>
+            <div className='container'>
+              <form action={placeOrder}>
+                <div className='row'>
+                  <div className='col-lg-9'>
+                    <h2 className='checkout-title' style={{ display: "flex" }}>
                       {t("BILLING_DETAILS")}
                     </h2>
-                    <div className="row">
-                      <div className="col-sm-12">
+                    <div className='row'>
+                      <div className='col-sm-12'>
                         <label style={{ display: "flex" }}>{t("EMAIL")}</label>
                         <input
-                          type="text"
-                          className="form-control"
-                          name="Email"
+                          style={{
+                            border: required ? "1px solid red" : "none",
+                          }}
+                          type='email'
+                          className={
+                            !validation && submitted
+                              ? "form-control22"
+                              : "form-control"
+                          }
+                          name='Email'
                           required
                           onChange={updateUserData}
                         />
                       </div>
 
-                      <div className="col-sm-12">
+                      <div className='col-sm-12'>
                         <label style={{ display: "flex" }}>
                           {t("MOBILE_NUMBER")}
                         </label>
                         <input
-                          type="text"
+                          style={{
+                            border: required ? "1px solid red" : "none",
+                          }}
+                          type='text'
                           maxLength={11}
-                          className="form-control"
+                          className={
+                            !validation && submitted
+                              ? "form-control22"
+                              : "form-control"
+                          }
                           required
-                          name="PhoneNumber"
+                          name='PhoneNumber'
                           onChange={updateUserData}
                         />
                       </div>
                     </div>
 
                     <label style={{ display: "flex" }}>{t("CITY")}</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      required
-                      name="City"
-                      onChange={updateUserData}
-                    />
-
-                    <label style={{ display: "flex" }}>
-                      {t("POSTAL_CODE")}
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      required
-                      name="PostalCode"
-                      onChange={updateUserData}
-                    />
+                    <select
+                      style={{ border: required ? "1px solid red" : "none" }}
+                      name='city'
+                      className={
+                        !validation && submitted
+                          ? "form-control22"
+                          : "form-control"
+                      }
+                      value={fees}
+                      onChange={(e) => {
+                        setFees(e.target.value);
+                        setUserData({
+                          ...userData,
+                          City: cities[e.target.value]?.deliveryFees,
+                        });
+                      }}>
+                      <option value=''>{t("CITY")}</option>
+                      {cities?.map((item, index) => (
+                        <option value={index} key={index}>
+                          {item?.city}
+                        </option>
+                      ))}
+                    </select>
 
                     <label style={{ display: "flex" }}>{t("ADDRESS")}</label>
                     <textarea
-                      type="text"
-                      className="form-control"
+                      type='text'
+                      style={{ border: required ? "1px solid red" : "none" }}
+                      className={
+                        !validation && submitted
+                          ? "form-control22"
+                          : "form-control"
+                      }
                       required
-                      name="Address"
+                      name='Address'
                       onChange={updateUserData}
                     />
                   </div>
 
-                  <aside className="col-lg-3">
-                    <div className="summary">
-                      <h3 className="summary-title" style={{ display: "flex" }}>
+                  <aside className='col-lg-3'>
+                    <div className='summary'>
+                      <h3 className='summary-title' style={{ display: "flex" }}>
                         {t("YOUR_ORDER")}
                       </h3>
 
-                      <table className="table table-summary">
+                      <table className='table table-summary'>
                         <thead>
                           <tr>
-                            <th>{t("PRODUCT")}</th>
-                            <th>{t("TOTAL")}</th>
+                            <th style={{ width: "50%", textAlign: "start" }}>
+                              {t("PRODUCT")}
+                            </th>
+                            <th style={{ width: "50%", textAlign: "end" }}>
+                              {t("TOTAL")}
+                            </th>
                           </tr>
                         </thead>
 
                         <tbody>
                           {cartlist?.map((item, index) => (
                             <tr key={index}>
-                              <td>
+                              <td style={{ width: "50%", textAlign: "start" }}>
                                 {" "}
-                                <ALink href={`/product/default/${item.slug}`}>
+                                <span
+                                  onClick={() => goToProduct(item?.productId)}>
                                   {item.name}
-                                </ALink>
+                                </span>
                               </td>
-                              <td>
+                              <td style={{ width: "50%", textAlign: "end" }}>
                                 {item.discountedPrice
                                   ? item.discountedPrice * item.count
                                   : item.price * item.count}
                               </td>
                             </tr>
                           ))}
-                          <tr className="summary-subtotal">
-                            <td>{t("SUB_TOTAL")}:</td>
-                            <td>
-                              EGP{" "}
-                              {getCartTotalPrice(cartlist).toLocaleString(
+                          <tr className='summary-subtotal'>
+                            <td style={{ width: "50%", textAlign: "start" }}>
+                              {t("SUB_TOTAL")}:
+                            </td>
+                            <td style={{ width: "50%", textAlign: "end" }}>
+                              {getCartTotalPrice(cartlist, true).toLocaleString(
                                 undefined,
                                 {
                                   minimumFractionDigits: 2,
@@ -186,13 +267,19 @@ function Checkout(props) {
                             </td>
                           </tr>
                           <tr>
-                            <td>{t("SHIPPING")}</td>
-                            <td>{t("FREE_SHIPPING")}</td>
+                            <td style={{ width: "50%", textAlign: "start" }}>
+                              {t("SHIPPING")}
+                            </td>
+                            <td style={{ width: "50%", textAlign: "end" }}>
+                              {cities?.[fees]?.deliveryFees}
+                            </td>
                           </tr>
-                          <tr className="summary-total">
-                            <td>{t("TOTAL")}:</td>
-                            <td>
-                              EGP{" "}
+                          <tr className='summary-total'>
+                            <td style={{ width: "50%", textAlign: "start" }}>
+                              {t("TOTAL")}:
+                            </td>
+                            <td style={{ width: "100%", textAlign: "end" }}>
+                              {router?.locale == "en" && " EGP "}
                               {getCartTotalPrice(cartlist).toLocaleString(
                                 undefined,
                                 {
@@ -200,22 +287,18 @@ function Checkout(props) {
                                   maximumFractionDigits: 2,
                                 }
                               )}
+                              {router?.locale == "ar" && " جم "}
                             </td>
                           </tr>
                         </tbody>
                       </table>
 
-                      <Accordion type="checkout">
-                        <Card disabled={true} title="Cash on delivery"></Card>
-                      </Accordion>
-
                       <button
-                        type="submit"
-                        className="btn btn-outline-primary-2 btn-order btn-block"
-                        onClick={placeOrder}
-                      >
-                        <span className="btn-text">{t("PLACE_ORDER")}</span>
-                        <span className="btn-hover-text">
+                        type='submit'
+                        className={`btn btn-outline-primary-2 btn-order btn-block`}
+                        onClick={placeOrder}>
+                        <span className='btn-text'>{t("PLACE_ORDER")}</span>
+                        <span className='btn-hover-text'>
                           {t("PLACE_ORDER")}
                         </span>
                       </button>

@@ -9,10 +9,7 @@ function ErrorPage () {
                     <ol className="breadcrumb">
                         <li className="breadcrumb-item">
                             <ALink href="/">Home</ALink>
-                        </li>
-                        <li className="breadcrumb-item">
-                            <ALink href="#">Pages</ALink>
-                        </li>
+                        </li>z
                         <li className="breadcrumb-item active">404</li>
                     </ol>
                 </div>

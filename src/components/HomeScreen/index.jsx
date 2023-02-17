@@ -46,14 +46,13 @@ function HomeScreen({banners}) {
 
                 <div className='banner-content'>
                   <h3 className='banner-title text-white'>
-                    <ALink
-                      href={{
-                        pathname: "/shop/3cols",
-                      }}>
-                      {t("TOPS", { ns: "common" })}
+                    <ALink href='/shop/3cols?filter=newarrival'>
+                      {t("newArrival", { ns: "common" })}
                     </ALink>
                   </h3>
-                  <ALink href='/shop/3cols' className='banner-link'>
+                  <ALink
+                    href='/shop/3cols?filter=newarrival'
+                    className='banner-link'>
                     {t("SHOP", { ns: "common" })}
                     <i className='icon-long-arrow-right'></i>
                   </ALink>
@@ -119,14 +118,11 @@ function HomeScreen({banners}) {
 
                 <div className='banner-content'>
                   <h3 className='banner-title text-white'>
-                    <ALink
-                      href={{
-                        pathname: "/shop/3cols",
-                      }}>
-                      {t("BOTTOMS", { ns: "common" })}
+                    <ALink href='/shop/3cols?filter=discount'>
+                      {t("Discount", { ns: "common" })}
                     </ALink>
                   </h3>
-                  <ALink href='/shop/3cols' className='banner-link'>
+                  <ALink href='/shop/3cols/category?' className='banner-link'>
                     {t("SHOP", { ns: "common" })}
                     <i className='icon-long-arrow-right'></i>
                   </ALink>

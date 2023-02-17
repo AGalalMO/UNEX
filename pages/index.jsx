@@ -6,7 +6,6 @@ import axiosInstance from "~/src/utils/axios/axiosInstance";
 import { APIS } from "~/src/utils/ServiceUrls";
 
 function Home (props) {
-  console.log("propppsss",props)
   return (
     <Layout>
       <HomeScreen banners={props?.banners} />
