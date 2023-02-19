@@ -1,4 +1,4 @@
-const baseUrl = "http://imustafaaaa-001-site1.btempurl.com/api/";
+const baseUrl = "https://unexcityactive-001-site1.etempurl.com/";
 export const APIS = {
   AUTH: {
     SIGNIN: `${baseUrl}account/login`,
