@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import ALink from "~/src/components/features/alink";
 import PageHeader from "~/src/components/features/page-header";
 import { countTo } from "~/src/utils/shared";
-import { homeData } from "~/src/utils/shared/data";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Layout from "~/src/components/layout";
 import { useTranslation } from "next-i18next";

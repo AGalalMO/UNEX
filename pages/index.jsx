@@ -1,7 +1,6 @@
 import HomeScreen from "~/src/components/HomeScreen";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Layout from "~/src/components/layout";
-import axios from "axios";
 import axiosInstance from "~/src/utils/axios/axiosInstance";
 import { APIS } from "~/src/utils/ServiceUrls";
 
