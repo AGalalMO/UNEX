@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
 
 import ALink from "~/src/components/features/alink";
 import PageHeader from "~/src/components/features/page-header";
@@ -13,7 +12,6 @@ import { useRouter } from "next/router";
 import { Button, Stack } from "@mui/material";
 
 function Orders(props) {
-  const dispatch = useDispatch();
   const { locale } = useRouter();
   const [cartList, setCartList] = useState([]);
   const { t } = useTranslation(["cart", "common"]);
@@ -31,7 +29,6 @@ function Orders(props) {
     });
     setCartList(orders?.data);
   };
-  const router = useRouter();
 
   const getStatus = (status) => {
     let text = t("confirmed");
